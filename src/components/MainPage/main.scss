@@ -1,0 +1,31 @@
+@use '/src/styles/partials/mixins' as *;
+@use "/src/styles/partials/variables" as *;
+
+.main{
+    padding: 0 12rem;
+    width: 100%;
+    @include flex-box(column);
+    align-items: center;
+    // justify-content: baseline;
+
+    @include tablet{
+    }
+    
+   &__mainHeader{
+   
+    @include tablet{
+        padding: 0 2rem;
+        height: 65vh;
+        @include desktab-mainHeader;
+    }
+
+    @include desktop{
+        opacity: 0;
+    }
+    }
+    &__subtexts{
+        padding: 0 4rem;
+        align-self: flex-end;
+    }
+
+}

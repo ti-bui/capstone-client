@@ -1,0 +1,21 @@
+@use '/src/styles/partials/mixins' as *;
+@use "/src/styles/partials/variables" as *;
+
+.albumsList{
+    margin-top: 5rem;
+
+    &__thumbnail{
+        width: 40rem;
+        height: 27rem;
+        border-radius: 0.7rem;
+        margin-bottom: 1rem;
+        overflow: hidden;
+
+        &-img{
+            width: 40rem;
+        }
+     
+
+    }
+
+}

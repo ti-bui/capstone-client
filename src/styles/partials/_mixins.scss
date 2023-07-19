@@ -1,0 +1,21 @@
+@use './variables' as *;
+@use './typography' as *;
+
+@mixin tablet{
+    @media (min-width: $tablet-breakpoint){
+        @content;
+    }
+}
+@mixin desktop{
+    @media(min-width: $desktop-breakpoint){
+        @content;
+    }
+}
+@mixin flex-box($direction){
+    display: flex;
+    flex-direction: $direction;
+}
+
+@mixin desktab-mainHeader{
+    font-size: 20rem;
+}
