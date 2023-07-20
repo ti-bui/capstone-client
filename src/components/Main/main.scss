@@ -1,0 +1,22 @@
+@use '/src/styles/partials/mixins' as *;
+@use "/src/styles/partials/variables" as *;
+
+.main{
+    padding: 0 1.5rem;
+    width: 100%;
+    @include flex-box(column);
+    align-items: center;
+    justify-content: center;
+    
+   &__mainHeader{
+    font-size: 8rem;
+    opacity: 0;
+    height: 12rem;
+    }
+    &__subtexts{
+        width: 100%;
+        font-size: 1rem;
+        @include flex-box(column);
+        align-items: center;
+    }
+}

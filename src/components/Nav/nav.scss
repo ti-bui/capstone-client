@@ -1,6 +1,23 @@
 .nav{
-    padding: 0 3rem;
+    padding: 1rem 1rem 0 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-weight: 400;
+    
+
+    &__logo{
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    &__links{
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    &__timezone{
+        font-size: 1rem;
+        font-weight: 400;
+    }
 }

@@ -2,20 +2,28 @@
 @use "/src/styles/partials/variables" as *;
 
 .albumsList{
-    margin-top: 5rem;
+    margin: 3rem 0 1rem 0;
+    @include flex-box(column);
+    align-items: center;
+
+    &__album{
+        margin-bottom: 2rem;
+    }
 
     &__thumbnail{
-        width: 40rem;
-        height: 27rem;
+        width: 20rem;
+        height: 13rem;
         border-radius: 0.7rem;
-        margin-bottom: 1rem;
+        // margin-bottom: 1rem;
         overflow: hidden;
 
         &-img{
-            width: 40rem;
+            width: 22rem;
         }
-     
+    }
 
+    &__info{
+            font-size: 1rem;
     }
 
 }

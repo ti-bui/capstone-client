@@ -17,7 +17,7 @@ const PhotoList = () => {
     <section className="albumsList">
       {albums.map((album) => {
         return (
-          <article>
+          <article className="albumsList__album">
             <div key={album.id} className="albumsList__thumbnail">
               <img
                 className="albumsList__thumbnail-img"
@@ -25,9 +25,10 @@ const PhotoList = () => {
                 alt={album.album_name}
               />
             </div>
-            <div className="albumsList__info"></div>
-            <h3 className="albumsList__thumbnail-title">{album.album_name}</h3>
-            <h3 className="albumsList__thumbnail-year">{album.year_taken}</h3>
+
+            <h3 className="albumsList__info">
+              / {album.album_name}-{album.year_taken}
+            </h3>
           </article>
         );
       })}

@@ -1,14 +1,16 @@
 import "./App.scss";
-import Main from "./components/MainPage/Main";
+import About from "./components/About/About";
+import Main from "./components/Main/Main";
 import Nav from "./components/Nav/Nav";
 import PhotoList from "./components/PhotoList/PhotoList";
 
 function App() {
   return (
     <>
-      <Nav />
-      <Main />
-      <PhotoList />
+      {/* <Nav /> */}
+      {/* <Main /> */}
+      {/* <PhotoList />  */}
+      <About />
     </>
   );
 }

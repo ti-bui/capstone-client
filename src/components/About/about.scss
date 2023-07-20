@@ -1,0 +1,35 @@
+@use '/src/styles/partials/mixins' as *;
+@use "/src/styles/partials/variables" as *;
+
+.about{
+    color: $cream;
+    height: 100vh;
+    background-color: $black;
+    padding: 0 1.5rem;
+    @include flex-box(column);
+    align-items: center;
+
+    &__header{
+        font-size: 3rem;
+    }
+    &__blocks{
+        padding: 1rem 0;
+
+        &-block{
+            font-size: 1rem;
+            font-weight: 400;
+            padding: 1rem 0;
+        }
+    }
+    &__logos{
+        padding: 2rem 0;
+        width: 100%;
+        @include flex-box(row);
+        align-items: baseline;
+        justify-content: space-evenly;
+
+        &-logo{
+            width: 24px;
+        }
+    }
+}
