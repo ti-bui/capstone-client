@@ -7,7 +7,7 @@ import PhotoList from "./components/PhotoList/PhotoList";
 function App() {
   return (
     <>
-      {/* <Nav /> */}
+      <Nav />
       {/* <Main /> */}
       {/* <PhotoList />  */}
       <About />
