@@ -2,6 +2,7 @@ import "./App.scss";
 import About from "./components/About/About";
 import Main from "./components/Main/Main";
 import Nav from "./components/Nav/Nav";
+import PhotoDetails from "./components/PhotoDetails/PhotoDetails";
 import PhotoList from "./components/PhotoList/PhotoList";
 
 function App() {
@@ -9,8 +10,9 @@ function App() {
     <>
       <Nav />
       {/* <Main /> */}
-      {/* <PhotoList />  */}
-      <About />
+      {/* <PhotoList /> */}
+      {/* <About /> */}
+      <PhotoDetails />
     </>
   );
 }
