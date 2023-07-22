@@ -1,5 +1,6 @@
 import "./photoList.scss";
 import { Link } from "react-router-dom";
+import ProgressiveImage from "react-progressive-image";
 
 const PhotoList = ({ albums }) => {
   return (
@@ -12,11 +13,11 @@ const PhotoList = ({ albums }) => {
             className="albumsList__album"
           >
             <div className="albumsList__thumbnail">
-              <img
+              <ProgressiveImage
                 className="albumsList__thumbnail-img"
                 src={album.thumbnail}
                 alt={album.album_name}
-              />
+              ></ProgressiveImage>
             </div>
 
             <h3 className="albumsList__info">
