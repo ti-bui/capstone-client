@@ -1,19 +1,19 @@
 import "./App.scss";
-import About from "./components/About/About";
-import Main from "./components/Main/Main";
-import Nav from "./components/Nav/Nav";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 import PhotoDetails from "./components/PhotoDetails/PhotoDetails";
-import PhotoList from "./components/PhotoList/PhotoList";
-
+import About from "./components/About/About";
+import Nav from "./components/Nav/Nav";
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Nav />
-      {/* <Main /> */}
-      {/* <PhotoList /> */}
-      {/* <About /> */}
-      <PhotoDetails />
-    </>
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/:id" element={<PhotoDetails />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

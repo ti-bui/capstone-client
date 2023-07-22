@@ -20,6 +20,9 @@
         font-size: 1rem;
         font-weight: 400;
     }
+    &__links:hover{
+        text-decoration: underline;
+    }
 
     &__timezone{
         font-size: 1rem;

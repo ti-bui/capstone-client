@@ -1,13 +1,19 @@
 import "./nav.scss";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
+  // const navigate = useNavigate();
+
   return (
     <nav className="nav">
-      <h3 className="nav__logo">Ti Bui</h3>
-      <div className="nav__links">
-        <span className="nav__links-link">about</span>,
-        <span className="nav__links-link">works</span>
-      </div>
+      <Link to="/" className="nav__logo">
+        Ti Bui
+      </Link>
+
+      <Link to="/about" className="nav__links">
+        about
+      </Link>
+
       <p className="nav__timezone">
         {new Date().toLocaleString("en-US", {
           month: "2-digit",

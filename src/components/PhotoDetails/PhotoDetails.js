@@ -3,18 +3,18 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const PhotoDetails = () => {
+const PhotoDetails = ({ albums }) => {
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
   const albums_api = "http://localhost:3011/albums";
-  const [albums, setAlbums] = useState([]);
+  // const [albums, setAlbums] = useState([]);
 
-  useEffect(() => {
-    axios.get(`${albums_api}`).then((response) => {
-      console.log(response.data);
-      setAlbums(response.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`${albums_api}`).then((response) => {
+  //     console.log(response.data);
+  //     setAlbums(response.data);
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (id) {

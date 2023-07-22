@@ -1,24 +1,17 @@
 import "./photoList.scss";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const PhotoList = () => {
-  const albums_api = "http://localhost:3011/albums";
-  const [albums, setAlbums] = useState([]);
-
-  useEffect(() => {
-    axios.get(`${albums_api}`).then((response) => {
-      console.log(response.data);
-      setAlbums(response.data);
-    });
-  }, []);
-
+const PhotoList = ({ albums }) => {
   return (
     <section className="albumsList">
       {albums.map((album) => {
         return (
-          <article className="albumsList__album">
-            <div key={album.id} className="albumsList__thumbnail">
+          <Link
+            to={`/${album.id}`}
+            key={album.id}
+            className="albumsList__album"
+          >
+            <div className="albumsList__thumbnail">
               <img
                 className="albumsList__thumbnail-img"
                 src={album.thumbnail}
@@ -29,7 +22,7 @@ const PhotoList = () => {
             <h3 className="albumsList__info">
               / {album.album_name}-{album.year_taken}
             </h3>
-          </article>
+          </Link>
         );
       })}
     </section>
