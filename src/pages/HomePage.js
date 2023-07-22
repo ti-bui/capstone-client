@@ -8,8 +8,6 @@ import PhotoDetails from "../components/PhotoDetails/PhotoDetails";
 
 const HomePage = () => {
   const albums_api = "http://localhost:3011/albums";
-  const [photos, setPhotos] = useState([]);
-  const { id } = useParams();
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
@@ -18,20 +16,6 @@ const HomePage = () => {
       setAlbums(response.data);
     });
   }, []);
-
-  useEffect(() => {
-    if (id) {
-      axios.get(`${albums_api}/${id}`).then((response) => {
-        console.log(response.data.images);
-        setPhotos(response.data.images);
-      });
-    } else {
-      axios.get(`${albums_api}/1`).then((response) => {
-        console.log(response.data.images[0]);
-        setPhotos(response.data.images);
-      });
-    }
-  }, [id]);
 
   return (
     <div>
