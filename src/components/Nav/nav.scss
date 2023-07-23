@@ -9,11 +9,16 @@
     flex-direction: row;
     justify-content: space-between;
     font-weight: 400;
+
+    @include tablet{
+        padding: 2rem 4rem;
+    }
     
 
     &__logo{
         font-size: 1rem;
         font-weight: 400;
+
     }
 
     &__links{

@@ -1,13 +1,21 @@
 import "./main.scss";
 import { useEffect } from "react";
 import { gsap, Power3 } from "gsap";
+import { SplitText } from "gsap/all";
+
+gsap.registerPlugin(SplitText);
 
 const Main = () => {
+  let mySplitText = new SplitText(".main__mainHeader", { type: "chars" });
+
+  let chars = mySplitText.chars;
+
   useEffect(() => {
-    gsap.to(".main__mainHeader", {
-      duration: 3,
+    gsap.to(chars, {
+      duration: 1,
       opacity: 1,
-      y: -20,
+      stagger: 0.05,
+      y: window.innerWidth > 768 ? "-70px" : "-20px",
       ease: Power3.easeOut,
     });
   });

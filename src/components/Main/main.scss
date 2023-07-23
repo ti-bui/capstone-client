@@ -7,16 +7,32 @@
     @include flex-box(column);
     align-items: center;
     justify-content: center;
+    height: 29vh;
+    
+
+    @include tablet{
+        padding: 0 4rem;
+        height: 41vh;
+        }
     
    &__mainHeader{
-    font-size: 8rem;
-    opacity: 0;
-    height: 12rem;
+    font-size: 6rem;
+    // opacity: 0;
+    height: 15vh;
+
+    @include tablet{
+        font-size: 15rem;
+        height: 31vh;
+    }
     }
     &__subtexts{
         width: 100%;
         font-size: 1rem;
         @include flex-box(column);
         align-items: center;
+        @include tablet{
+            display: none;
+            // height: 50vh;
+        }
     }
 }

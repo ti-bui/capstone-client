@@ -11,7 +11,10 @@ function App() {
   return (
     <BrowserRouter>
       <Nav />
-      <AnimatePresence initial={false} wait>
+      <AnimatePresence
+        //  initial={false}
+        wait
+      >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<About />} />
