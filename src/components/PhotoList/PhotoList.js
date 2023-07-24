@@ -8,35 +8,35 @@ const PhotoList = ({ albums }) => {
   const navigate = useNavigate();
 
   return (
-    <AnimatePresence wait>
-      <motion.section
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        className="albumsList"
-      >
-        {albums.map((album) => {
-          return (
-            <li key={album.id} className="albumsList__album">
-              <div className="albumsList__thumbnail">
-                <motion.img
-                  whileHover={{ scale: 1.1 }}
-                  transition={transition}
-                  onClick={() => navigate(`/${album.id}`)}
-                  className="albumsList__thumbnail-img"
-                  src={album.thumbnail}
-                  alt={album.album_name}
-                />
-              </div>
+    <motion.section
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="albumsList"
+    >
+      {albums.map((album) => {
+        return (
+          <li key={album.id} className="albumsList__album">
+            <div
+              onClick={() => navigate(`/${album.id}`)}
+              className="albumsList__thumbnail"
+            >
+              <motion.img
+                whileHover={{ scale: 1.1 }}
+                transition={transition}
+                className="albumsList__thumbnail-img"
+                src={album.thumbnail}
+                alt={album.album_name}
+              />
+            </div>
 
-              <h3 className="albumsList__info">
-                / {album.album_name}-{album.year_taken}
-              </h3>
-            </li>
-          );
-        })}
-      </motion.section>
-    </AnimatePresence>
+            <h3 className="albumsList__info">
+              / {album.album_name}-{album.year_taken}
+            </h3>
+          </li>
+        );
+      })}
+    </motion.section>
   );
 };
 

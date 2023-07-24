@@ -2,7 +2,7 @@
 @use "/src/styles/partials/variables" as *;
 
 .photoList{
-    
+    height: 100vh;
     &__intro{
         @include flex-box(column);
         align-items: center;
@@ -13,6 +13,7 @@
             @include tablet{
                 font-size: 14rem;
                 height: 14rem;
+                z-index: 1;
             }
         }
 

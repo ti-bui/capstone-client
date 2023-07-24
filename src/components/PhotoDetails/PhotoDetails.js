@@ -14,30 +14,19 @@ const PhotoDetails = () => {
   const { id } = useParams();
   const albums_api = "http://localhost:3011/albums";
 
-  useEffect(() => {
-    let mySplitText = new SplitText(".photoList__intro-header", {
-      type: "chars",
-    });
+  let mySplitText = new SplitText(".photoList__intro", {
+    type: "chars",
+  });
 
-    let chars = mySplitText.chars;
+  let chars = mySplitText.chars;
 
-    gsap.from(chars, {
-      opacity: 0,
-      y: 70,
-      duration: 2,
-      ease: "back",
-      stagger: 0.03,
-    });
-  }, []);
-
-  const imageDetailsMobile = {
-    width: 320,
-    height: 208,
-  };
-  const imageDetailsTablet = {
-    width: 800,
-    height: 512,
-  };
+  gsap.from(chars, {
+    opacity: 0,
+    y: 70,
+    duration: 2,
+    ease: "back",
+    stagger: 0.03,
+  });
 
   useEffect(() => {
     axios
@@ -53,9 +42,13 @@ const PhotoDetails = () => {
 
   return (
     <AnimatePresence>
-      <section
-        // initial={{ opacity: 0 }}
-        // animate={{ opacity: 1, transition: { transition } }}
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+        }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 2 }}
         className="photoList"
       >
         <div className="photoList__intro">
@@ -63,24 +56,12 @@ const PhotoDetails = () => {
           <h3 className="photoList__intro-year">{photos.year_taken}</h3>
         </div>
         <motion.div
-          initial={{
-            y: window.innerWidth > 768 ? 0 : "60%",
-            x: window.innerWidth > 768 ? "16%" : "13%",
-            width:
-              window.innerWidth > 768
-                ? imageDetailsTablet.width
-                : imageDetailsMobile.width,
-            height:
-              window.innerWidth > 768
-                ? imageDetailsTablet.height
-                : imageDetailsMobile.height,
-          }}
           animate={{
             y: 0,
             x: 0,
             width: "100%",
-            height: window.innerWidth > 768 ? 800 : 300,
-            transition: { delay: 0.2, ...transition },
+            height: window.innerWidth > 768 ? 800 : 200,
+            transition: { delay: 0.5, ...transition },
           }}
           className="photoList__thumbnail"
         >
@@ -113,7 +94,7 @@ const PhotoDetails = () => {
               );
             })}
         </ul>
-      </section>
+      </motion.section>
     </AnimatePresence>
   );
 };
