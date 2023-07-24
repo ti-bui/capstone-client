@@ -16,6 +16,16 @@
                 z-index: 1;
             }
         }
+        &-header--animate{
+            display: none;
+
+            @include tablet{
+                font-size: 14rem;
+                height: 14rem;
+                // z-index: -1;
+                color: rebeccapurple;
+            }
+        }
 
     }
 

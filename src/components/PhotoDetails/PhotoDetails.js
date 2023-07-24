@@ -3,10 +3,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { gsap, Power3 } from "gsap";
-import { SplitText } from "gsap/all";
+import { gsap } from "gsap";
+import { SplitText, ScrollTrigger } from "gsap/all";
+import BackToTopButton from "../BackToTopButton/BackToTopButton";
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const PhotoDetails = () => {
   const transition = { duration: 2, ease: [0.6, 0.01, -0.05, 0.9] };
@@ -18,7 +19,22 @@ const PhotoDetails = () => {
     type: "chars",
   });
 
+  let headerStext = new SplitText(".photoList__intro-header--animate", {
+    type: "chars",
+  });
+
   let chars = mySplitText.chars;
+  let headerChars = headerStext.chars;
+
+  gsap.to(headerChars, {
+    y: -1000,
+    duration: 3,
+    scrollTrigger: {
+      trigger: ".photoList__intro",
+      start: "top top",
+      markers: true,
+    },
+  });
 
   gsap.from(chars, {
     opacity: 0,
@@ -53,6 +69,9 @@ const PhotoDetails = () => {
       >
         <div className="photoList__intro">
           <h2 className="photoList__intro-header">{photos.album_name} </h2>
+          <h2 className="photoList__intro-header photoList__intro-header--animate ">
+            {photos.album_name}
+          </h2>
           <h3 className="photoList__intro-year">{photos.year_taken}</h3>
         </div>
         <motion.div
@@ -94,6 +113,7 @@ const PhotoDetails = () => {
               );
             })}
         </ul>
+        <BackToTopButton />
       </motion.section>
     </AnimatePresence>
   );
