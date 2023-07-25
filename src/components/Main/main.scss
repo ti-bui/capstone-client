@@ -17,10 +17,14 @@
     
    &__mainHeader{
     font-size: 6rem;
-    // opacity: 0;
     height: 15vh;
 
     @include tablet{
+        font-size: 18rem;
+        height: 25vh;
+    }
+
+    @include desktop{
         font-size: 25rem;
         height: 58vh;
     }
@@ -32,7 +36,6 @@
         align-items: center;
         @include tablet{
             display: none;
-            // height: 50vh;
         }
     }
 }

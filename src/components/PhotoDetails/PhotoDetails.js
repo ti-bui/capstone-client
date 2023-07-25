@@ -19,22 +19,7 @@ const PhotoDetails = () => {
     type: "chars",
   });
 
-  let headerStext = new SplitText(".photoList__intro-header--animate", {
-    type: "chars",
-  });
-
   let chars = mySplitText.chars;
-  let headerChars = headerStext.chars;
-
-  gsap.to(headerChars, {
-    y: -1000,
-    duration: 3,
-    scrollTrigger: {
-      trigger: ".photoList__intro",
-      start: "top top",
-      markers: true,
-    },
-  });
 
   gsap.from(chars, {
     opacity: 0,
@@ -56,6 +41,31 @@ const PhotoDetails = () => {
       });
   }, [id]);
 
+  useEffect(() => {
+    gsap.to(".header-animate", {
+      y: 900,
+      duration: 4,
+      scrollTrigger: {
+        toggleClass: "cream",
+        trigger: ".header-animate",
+        start: "bottom 10%",
+        end: "bottom -25%",
+        // scrub: 4,
+        // pin: true,
+        // toggleActions: "onEnter  onLeave  onEnterBack  onLeaveBack"
+        // play pause reverse restart reset resume complete none
+        toggleActions: "none play resume restart",
+        markers: true,
+      },
+    });
+
+    // gsap.to(".header-animate", {
+    //   x: 400,
+    //   duration: 3,
+    //   delay: 4,
+    // });
+  }, []);
+
   return (
     <AnimatePresence>
       <motion.section
@@ -68,10 +78,8 @@ const PhotoDetails = () => {
         className="photoList"
       >
         <div className="photoList__intro">
-          <h2 className="photoList__intro-header">{photos.album_name} </h2>
-          <h2 className="photoList__intro-header photoList__intro-header--animate ">
-            {photos.album_name}
-          </h2>
+          {/* <h2 className="photoList__intro-header">{photos.album_name} </h2> */}
+          <h2 className="header-animate">{photos.album_name} </h2>
           <h3 className="photoList__intro-year">{photos.year_taken}</h3>
         </div>
         <motion.div
@@ -79,7 +87,7 @@ const PhotoDetails = () => {
             y: 0,
             x: 0,
             width: "100%",
-            height: window.innerWidth > 768 ? 800 : 200,
+            height: window.innerWidth > 768 ? "100vh" : 300,
             transition: { delay: 0.5, ...transition },
           }}
           className="photoList__thumbnail"
