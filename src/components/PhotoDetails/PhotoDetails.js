@@ -60,24 +60,33 @@ const PhotoDetails = () => {
     // });
 
     const tl = gsap.timeline({
+      stagger: 0.3,
       scrollTrigger: {
         markers: true,
-        toggleClass: "cream",
         trigger: ".photoList",
-        start: "15% 5%",
-        end: "85% 25%",
-        scrub: 4,
-        toggleActions: "play pause resume reverse",
+        start: "30% 20%",
+        end: "80% 20%",
+        toggleClass: "cream",
+        ease: "back",
+        scrub: 1,
+        toggleActions: "play resume play reset",
       },
     });
 
-    tl.to(".header-animate", { y: 350, duration: 10 })
-      .to(".header-animate", { y: 750, duration: 10 })
-      .to(".header-animate", { y: 1000, duration: 10 })
+    tl.to(".header-animate", { y: 350, duration: 5 })
+      .to(".header-animate", { y: 750, duration: 5 })
+      .to(".header-animate", { y: 1110, duration: 5 })
       .to(".header-animate", {
-        x: 300,
-        duration: 3,
+        x: 400,
+        duration: 4,
+        scale: 0.5,
       });
+    // .to(".header-animate", {
+    //   x: 400,
+    //   y: 1350,
+    //   duration: 4,
+    //   scale: 0.5,
+    // });
     // .to(".header-animate", { y: 0, duration: 1});
   }, []);
 

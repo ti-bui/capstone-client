@@ -7,12 +7,15 @@
     @include flex-box(column);
     align-items: center;
     justify-content: center;
-    height: 29vh;
+    // height: 29vh;
+    height: 100vh;
+    scroll-snap-align: start;
+
     
 
     @include tablet{
         padding: 0 4rem;
-        height: 41vh;
+        // height: 41vh;
         }
     
    &__mainHeader{
@@ -21,12 +24,12 @@
 
     @include tablet{
         font-size: 18rem;
-        height: 25vh;
+        // height: 25vh;
     }
 
     @include desktop{
         font-size: 25rem;
-        height: 58vh;
+        height: 100vh;
     }
     }
     &__subtexts{

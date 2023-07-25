@@ -5,23 +5,31 @@
     margin: 3rem 0 1rem 0;
     @include flex-box(column);
     align-items: center;
+    background-color: black;
+    scroll-snap-align: start;
 
     @include tablet{
         margin: 0;
     }
 
     &__album{
-        margin-bottom: 2rem;
+        // margin-bottom: 2rem;
+        @include flex-box(column);
+        justify-content: center;
+        height: 100vh;
+        
+        // background-color: black;
 
-        @include tablet{
-            margin-bottom: 5rem;
-        }
+        // @include tablet{
+        //     margin-bottom: 5rem;
+        // }
     }
 
     &__thumbnail{
         width: 20rem;
         height: 13rem;
         overflow: hidden;
+    
 
         @include tablet{
             width: 50rem;
