@@ -42,28 +42,43 @@ const PhotoDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    gsap.to(".header-animate", {
-      y: 900,
-      duration: 4,
+    // gsap.to(".header-animate", {
+    //   y: 900,
+    //   duration: 4,
+    //   scrollTrigger: {
+    //     toggleClass: "cream",
+    //     trigger: ".photoList",
+    //     start: "15% 5%",
+    //     end: "80% 25%",
+    //     scrub: 1,
+    //     // pin: true,
+    //     // toggleActions: "onEnter  onLeave  onEnterBack  onLeaveBack"
+    //     // play pause reverse restart reset resume complete none
+    //     toggleActions: "play resume resume reset",
+    //     markers: true,
+    //   },
+    // });
+
+    const tl = gsap.timeline({
       scrollTrigger: {
-        toggleClass: "cream",
-        trigger: ".header-animate",
-        start: "bottom 10%",
-        end: "bottom -25%",
-        // scrub: 4,
-        // pin: true,
-        // toggleActions: "onEnter  onLeave  onEnterBack  onLeaveBack"
-        // play pause reverse restart reset resume complete none
-        toggleActions: "none play resume restart",
         markers: true,
+        toggleClass: "cream",
+        trigger: ".photoList",
+        start: "15% 5%",
+        end: "85% 25%",
+        scrub: 4,
+        toggleActions: "play pause resume reverse",
       },
     });
 
-    // gsap.to(".header-animate", {
-    //   x: 400,
-    //   duration: 3,
-    //   delay: 4,
-    // });
+    tl.to(".header-animate", { y: 350, duration: 10 })
+      .to(".header-animate", { y: 750, duration: 10 })
+      .to(".header-animate", { y: 1000, duration: 10 })
+      .to(".header-animate", {
+        x: 300,
+        duration: 3,
+      });
+    // .to(".header-animate", { y: 0, duration: 1});
   }, []);
 
   return (
