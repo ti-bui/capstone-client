@@ -1,55 +1,117 @@
 @use '/src/styles/partials/mixins' as *;
 @use "/src/styles/partials/variables" as *;
 
-.albumsList{
-    margin: 3rem 0 1rem 0;
+
+.slides {
+  @include flex-box(column);
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .slides .list {
+    @include flex-box(column);
+    width: 100%;
+  }
+  .slides .slide {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide .imgWrap {
+    @include flex-box(row);
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    will-change: transform;
+    background-size: cover;
+  }
+  
+  .img{
+    width: 100%;
+  }
+
+  .slide .content {
     @include flex-box(column);
     align-items: center;
-    // background-color: black;
-    scroll-snap-align: start;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    width: 95%;
+    padding: 26rem;
+    margin: 0 auto;
+    max-width: 40rem;
+    position: relative;
+    align-items: center;
+    color: white;
+    text-transform: uppercase;
+  }
 
-    @include tablet{
-        margin: 0;
-    }
 
-    &__album{
-        // margin-bottom: 2rem;
-        @include flex-box(column);
-        justify-content: center;
-        height: 100vh;
+.content{
+  line-height: 100%;
+  font-size: 10rem;
+  height: 50px;
+  // opacity: 0;
+}
+
+
+
+
+
+
+// .albumsList{
+//     margin: 3rem 0 1rem 0;
+//     @include flex-box(column);
+//     align-items: center;
+//     // background-color: black;
+//     scroll-snap-align: start;
+
+//     @include tablet{
+//         margin: 0;
+//     }
+
+//     &__album{
+//         // margin-bottom: 2rem;
+//         @include flex-box(column);
+//         justify-content: center;
+//         height: 100vh;
         
-        // background-color: black;
+//         // background-color: black;
 
-        // @include tablet{
-        //     margin-bottom: 5rem;
-        // }
-    }
+//         // @include tablet{
+//         //     margin-bottom: 5rem;
+//         // }
+//     }
 
-    &__thumbnail{
-        width: 20rem;
-        // height: 13rem;
-        overflow: hidden;
+//     &__thumbnail{
+//         width: 20rem;
+//         overflow: hidden;
     
 
-        @include tablet{
-            width: 50rem;
-            // height: 32rem;
-        }
+//         @include tablet{
+//             width: 50rem;
+//         }
 
-        &-img{
-            width: 22rem;
-            @include tablet{
-                width: 100%;
+//         &-img{
+//             width: 22rem;
+//             @include tablet{
+//                 width: 100%;
                
-            }
-        }
-    }
+//             }
+//         }
+//     }
 
-    &__info{
-            font-size: 1rem;
-            @include tablet{
-                display: none;
-            }
-    }
+//     &__info{
+//             font-size: 1rem;
+//             @include tablet{
+//                 display: none;
+//             }
+//     }
 
-}
+// }

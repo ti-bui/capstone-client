@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Main from "../components/Main/Main";
 import PhotoList from "../components/PhotoList/PhotoList";
 import PhotoDetails from "../components/PhotoDetails/PhotoDetails";
+import BackToTopButton from "../components/BackToTopButton/BackToTopButton";
 
 const HomePage = () => {
   const albums_api = "http://localhost:3011/albums";
@@ -21,6 +22,7 @@ const HomePage = () => {
     <div className="container">
       <Main />
       <PhotoList albums={albums} />
+      <BackToTopButton />
     </div>
   );
 };
