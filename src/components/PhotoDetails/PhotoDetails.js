@@ -17,20 +17,39 @@ const PhotoDetails = () => {
   const { id } = useParams();
   const albums_api = "http://localhost:3011/albums";
 
-  let mySplitText = new SplitText(".photoList__intro", {
-    type: "chars",
+  //PhotoList animation
+
+  const photosList = gsap.utils.toArray(".container");
+  photosList.forEach((photo) => {
+    gsap.to(photo, {
+      x: 100,
+      scrollTrigger: {
+        markers: true,
+        trigger: ".container",
+        start: "top top",
+        toggleActions: "play resume reverse reset",
+      },
+    });
   });
 
-  let chars = mySplitText.chars;
+  //Header split text animation
+  useEffect(() => {
+    let mySplitText = new SplitText(".photoList__intro", {
+      type: "chars",
+    });
 
-  gsap.from(chars, {
-    opacity: 0,
-    y: 70,
-    duration: 2,
-    ease: "back",
-    stagger: 0.03,
+    let chars = mySplitText.chars;
+
+    gsap.from(chars, {
+      opacity: 0,
+      y: 70,
+      duration: 2,
+      ease: "back",
+      stagger: 0.03,
+    });
   });
 
+  //API call
   useEffect(() => {
     axios
       .get(`${albums_api}/${id}`)
@@ -43,26 +62,23 @@ const PhotoDetails = () => {
       });
   }, [id]);
 
+  //Header animation move down y-axis
   useEffect(() => {
     const tl = gsap.timeline({
       stagger: 0.3,
       scrollTrigger: {
-        markers: true,
+        // markers: true,
         trigger: ".photoList",
         start: "30% 20%",
         end: "90% 20%",
         toggleClass: "cream",
         ease: "back",
         scrub: 1,
-        toggleActions: "play resume play reset",
+        toggleActions: "play resume reverse reset",
       },
     });
 
-    tl.to(".header-animate", { y: 350, duration: 5 }).to(".header-animate", {
-      y: 900,
-      duration: 5,
-      scale: 0.5,
-    });
+    tl.to(".header-animate", { y: 600, duration: 2 });
   }, []);
 
   return (
@@ -102,29 +118,32 @@ const PhotoDetails = () => {
           />
         </motion.div>
 
-        <ul className="photoList__lists">
+        <ul className="photoList__lists  container">
           {photos.images &&
             photos.images.map((photo) => {
               return (
                 <li className="photoList__lists-list">
-                  <div className="photoList__lists-list-imgWrap">
+                  <div className="photoList__lists-list-imgWrap left-content">
                     <img
                       className="photoList__lists-list-imgWrap-img"
                       src={photo.image_url}
                       alt="photo"
                     ></img>
                   </div>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setLikes(likes + 1);
-                    }}
-                    className="photoList__lists-list-like"
-                  >
-                    {likes}
-                    Likes
-                  </button>
-                  <p className="photoList__lists-list-num">#{photo.image_id}</p>
+                  {/* <div className="right-content"> */}
+                  {/* <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setLikes(likes + 1);
+                      }}
+                      className="photoList__lists-list-like"
+                    >
+                      {likes}
+                      Likes
+                    </button> */}
+                  {/* </div> */}
+
+                  {/* <p className="photoList__lists-list-num">#{photo.image_id}</p> */}
                 </li>
               );
             })}
