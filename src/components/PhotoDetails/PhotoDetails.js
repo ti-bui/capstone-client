@@ -62,7 +62,7 @@ const PhotoDetails = () => {
     const tl = gsap.timeline({
       stagger: 0.3,
       scrollTrigger: {
-        markers: true,
+        // markers: true,
         trigger: ".photoList",
         start: "30% 20%",
         end: "80% 20%",

@@ -5,7 +5,7 @@
     margin: 3rem 0 1rem 0;
     @include flex-box(column);
     align-items: center;
-    background-color: black;
+    // background-color: black;
     scroll-snap-align: start;
 
     @include tablet{
@@ -27,13 +27,13 @@
 
     &__thumbnail{
         width: 20rem;
-        height: 13rem;
+        // height: 13rem;
         overflow: hidden;
     
 
         @include tablet{
             width: 50rem;
-            height: 32rem;
+            // height: 32rem;
         }
 
         &-img{

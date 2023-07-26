@@ -12,20 +12,7 @@ const PhotoList = ({ albums }) => {
   const navigate = useNavigate();
 
   // useEffect(() => {
-  //   const tl = gsap.timeline({
-  //     scrollTrigger: {
-  //       markers: true,
-  //       trigger: ".albumsList__thumbnail-img",
-  //       start: "top bottom",
-  //       // end: "bottm bottom",
-  //       scrub: 1,
-  //     },
-  //   });
-
-  //   tl.to(".albumsList__thumbnail-img", {
-  //     y: "100%",
-  //     duration: 1,
-  //   });
+  //   gsap.to;
   // }, []);
 
   return (
@@ -37,7 +24,7 @@ const PhotoList = ({ albums }) => {
     >
       {albums.map((album) => {
         return (
-          <li key={album.id} className="albumsList__album">
+          <div key={album.id} className="albumsList__album">
             <div
               onClick={() => navigate(`/${album.id}`)}
               className="albumsList__thumbnail"
@@ -54,7 +41,7 @@ const PhotoList = ({ albums }) => {
             <h3 className="albumsList__info">
               / {album.album_name}-{album.year_taken}
             </h3>
-          </li>
+          </div>
         );
       })}
     </motion.section>
