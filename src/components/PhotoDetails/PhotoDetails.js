@@ -59,7 +59,7 @@ const PhotoDetails = () => {
     });
 
     tl.to(".header-animate", { y: 350, duration: 5 }).to(".header-animate", {
-      y: 965,
+      y: 900,
       duration: 5,
       scale: 0.5,
     });
@@ -101,7 +101,7 @@ const PhotoDetails = () => {
             src={photos.thumbnail}
           />
         </motion.div>
-        <div className="photoList__subHeader"></div>
+
         <ul className="photoList__lists">
           {photos.images &&
             photos.images.map((photo) => {

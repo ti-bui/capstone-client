@@ -26,6 +26,7 @@
     &__intro{
         @include flex-box(column);
         align-items: center;
+        justify-content: center;
 
         &-header{
             font-size: 3rem;
