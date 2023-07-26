@@ -75,9 +75,10 @@
             margin-bottom: 2rem;
 
             @include tablet{
-                 @include flex-box(column);
+                 @include flex-box(row);
                  margin-bottom: 5rem;
-               
+                 justify-content: space-between;
+                 align-items: center;
             }
 
             &-imgWrap{
@@ -103,6 +104,8 @@
 
                 @include tablet{
                     display: none;
+                    font-weight: 400;
+                    font-size: 1.5rem;
                 }
             }
         }

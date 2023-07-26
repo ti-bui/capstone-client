@@ -10,6 +10,8 @@ import BackToTopButton from "../BackToTopButton/BackToTopButton";
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const PhotoDetails = () => {
+  const [likes, setLikes] = useState(0);
+  // const [liked, setLiked] = useState(true);
   const transition = { duration: 2, ease: [0.6, 0.01, -0.05, 0.9] };
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
@@ -42,30 +44,13 @@ const PhotoDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    // gsap.to(".header-animate", {
-    //   y: 900,
-    //   duration: 4,
-    //   scrollTrigger: {
-    //     toggleClass: "cream",
-    //     trigger: ".photoList",
-    //     start: "15% 5%",
-    //     end: "80% 25%",
-    //     scrub: 1,
-    //     // pin: true,
-    //     // toggleActions: "onEnter  onLeave  onEnterBack  onLeaveBack"
-    //     // play pause reverse restart reset resume complete none
-    //     toggleActions: "play resume resume reset",
-    //     markers: true,
-    //   },
-    // });
-
     const tl = gsap.timeline({
       stagger: 0.3,
       scrollTrigger: {
-        // markers: true,
+        markers: true,
         trigger: ".photoList",
         start: "30% 20%",
-        end: "80% 20%",
+        end: "90% 20%",
         toggleClass: "cream",
         ease: "back",
         scrub: 1,
@@ -73,21 +58,11 @@ const PhotoDetails = () => {
       },
     });
 
-    tl.to(".header-animate", { y: 350, duration: 5 })
-      .to(".header-animate", { y: 750, duration: 5 })
-      .to(".header-animate", { y: 1110, duration: 5 })
-      .to(".header-animate", {
-        x: 400,
-        duration: 4,
-        scale: 0.5,
-      });
-    // .to(".header-animate", {
-    //   x: 400,
-    //   y: 1350,
-    //   duration: 4,
-    //   scale: 0.5,
-    // });
-    // .to(".header-animate", { y: 0, duration: 1});
+    tl.to(".header-animate", { y: 350, duration: 5 }).to(".header-animate", {
+      y: 965,
+      duration: 5,
+      scale: 0.5,
+    });
   }, []);
 
   return (
@@ -126,7 +101,7 @@ const PhotoDetails = () => {
             src={photos.thumbnail}
           />
         </motion.div>
-
+        <div className="photoList__subHeader"></div>
         <ul className="photoList__lists">
           {photos.images &&
             photos.images.map((photo) => {
@@ -139,7 +114,16 @@ const PhotoDetails = () => {
                       alt="photo"
                     ></img>
                   </div>
-
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setLikes(likes + 1);
+                    }}
+                    className="photoList__lists-list-like"
+                  >
+                    {likes}
+                    Likes
+                  </button>
                   <p className="photoList__lists-list-num">#{photo.image_id}</p>
                 </li>
               );
