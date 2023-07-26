@@ -1,0 +1,22 @@
+@use '/src/styles/partials/mixins' as *;
+@use "/src/styles/partials/variables" as *;
+
+.button{
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 0px;
+    background: hsl(0, 20%, 3%);
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    color: $cream;
+    opacity: 0.9;
+}
+
+.button:hover{
+    background: hsl(0, 0%, 20%);
+    cursor: pointer;
+}

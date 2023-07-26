@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { SplitText, ScrollTrigger } from "gsap/all";
+import BackToTopButton from "../BackToTopButton/BackToTopButton";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -85,6 +86,7 @@ const PhotoList = ({ albums }) => {
           );
         })}
       </ul>
+      <BackToTopButton />
     </motion.section>
   );
 };
