@@ -12,6 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Nav />
+      {/* <About /> */}
       <AnimatePresence initial={false} wait>
         <ScrollToTopOnRouteChange />
         <Routes>
