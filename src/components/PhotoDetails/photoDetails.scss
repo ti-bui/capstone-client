@@ -1,7 +1,15 @@
 @use '/src/styles/partials/mixins' as *;
 @use "/src/styles/partials/variables" as *;
 
-
+.red{
+    border: 3px solid red;
+}
+.blue{
+    border: 3px solid blue;
+}
+.green{
+    border: 3px solid green;
+}
 .header-animate{
     // display: none;
 
@@ -57,7 +65,7 @@
 
         }
         @include desktop{
-            margin-bottom: 5rem;
+            // margin-bottom: 5rem;
         }
 
         &-img{
@@ -67,36 +75,29 @@
     }
 
     &__lists{
-        padding: 0 1rem;
+        // padding: 0 1rem;
 
         @include tablet{
             padding: 0;
             overflow: hidden;
         }
         &-list{
-            margin-bottom: 2rem;
-
-            @include tablet{
-                 @include flex-box(row);
-                 margin-bottom: 5rem;
-                 justify-content: space-between;
+                 @include flex-box(column);
+                 justify-content: center;
                  align-items: center;
-            }
 
             &-imgWrap{
-                height: auto;
+                @include flex-box(column);
+                height: 100vh;
                 overflow: hidden;
-               
-                @include tablet{
-                    width: 35rem;
-                }
-
-                @include desktop{
-                    width: 50rem;
-                }
+                width: 0;
+                align-items: center;
+                justify-content: center;
+                
 
                 &-img{
                     width: 100%;
+                    // height: 100%;
                 }
             }
             &-num{

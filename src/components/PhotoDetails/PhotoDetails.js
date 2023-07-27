@@ -18,16 +18,27 @@ const PhotoDetails = () => {
   const albums_api = "http://localhost:3011/albums";
 
   //PhotoList animation
+  useEffect(() => {
+    const tl = gsap.timeline();
 
-  const photosList = gsap.utils.toArray(".container");
-  photosList.forEach((photo) => {
-    gsap.to(photo, {
-      x: 100,
+    const photosList = gsap.utils.toArray(".photoList__lists-list-imgWrap");
+
+    photosList.forEach((photo) => {
+      tl.to(photo, {
+        // y: "100%",
+        // duration: 5,
+        // scale: 1,
+        // x: 50,
+        width: "100%",
+        duration: 5,
+      });
+    });
+
+    gsap.to(tl, {
       scrollTrigger: {
         markers: true,
-        trigger: ".container",
+        trigger: ".photoList__lists-list-imgWrap",
         start: "top top",
-        toggleActions: "play resume reverse reset",
       },
     });
   });
@@ -74,7 +85,7 @@ const PhotoDetails = () => {
         toggleClass: "cream",
         ease: "back",
         scrub: 1,
-        toggleActions: "play resume reverse reset",
+        // toggleActions: "play resume reverse reset",
       },
     });
 
@@ -118,12 +129,12 @@ const PhotoDetails = () => {
           />
         </motion.div>
 
-        <ul className="photoList__lists  container">
+        <ul className="photoList__lists green ">
           {photos.images &&
             photos.images.map((photo) => {
               return (
-                <li className="photoList__lists-list">
-                  <div className="photoList__lists-list-imgWrap left-content">
+                <li className="photoList__lists-list blue ">
+                  <div className="photoList__lists-list-imgWrap red">
                     <img
                       className="photoList__lists-list-imgWrap-img"
                       src={photo.image_url}
