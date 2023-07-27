@@ -1,4 +1,3 @@
-import Clock from "../Clock/Clock";
 import "./nav.scss";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";

@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { SplitText, ScrollTrigger, ScrollSmoother } from "gsap/all";
 import BackToTopButton from "../BackToTopButton/BackToTopButton";
+import heartIcon from "../../assets/icons/heart-icon.svg";
 
 gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
 
@@ -14,6 +15,25 @@ const PhotoDetails = () => {
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
   const albums_api = "http://localhost:3011/albums";
+  const [likes, setLikes] = useState({});
+  const [showHeart, setShowHeart] = useState({});
+
+  const handleDoubleClick = (imageId) => {
+    setLikes((prevLikes) => ({
+      ...prevLikes,
+      [imageId]: (prevLikes[imageId] || 0) + 1,
+    }));
+    setShowHeart((prevShowHeart) => ({
+      ...prevShowHeart,
+      [imageId]: true,
+    }));
+    setTimeout(() => {
+      setShowHeart((prevShowHeart) => ({
+        ...prevShowHeart,
+        [imageId]: false,
+      }));
+    }, 1000);
+  };
 
   //Header animation move down y-axis
   useEffect(() => {
@@ -46,7 +66,7 @@ const PhotoDetails = () => {
           end: "bottom top",
           trigger: ".photoList__lists-list",
           scrub: 1,
-          // toggleActions: "play resume reverse reset",
+          toggleActions: "play resume reverse complete",
         },
       });
 
@@ -126,18 +146,38 @@ const PhotoDetails = () => {
         <ul className="photoList__lists green ">
           {photos.images &&
             photos.images.map((photo) => {
+              const imageId = photo.image_id;
+              const imageLikes = likes[imageId] || 0;
+              const isShowHeart = showHeart[imageId];
+
               return (
                 <li
                   key={photo.image_id}
                   className="photoList__lists-list blue "
                 >
-                  <div className="photoList__lists-list-imgWrap red">
+                  <div
+                    onDoubleClick={() => handleDoubleClick(imageId)}
+                    onClick={handleDoubleClick}
+                    className="photoList__lists-list-imgWrap post"
+                  >
+                    {isShowHeart && (
+                      <img
+                        className="photoList__lists-list-imgWrap-heartIcon heart-icon"
+                        src={heartIcon}
+                        alt="heart-icon"
+                      />
+                    )}
                     <img
                       className="photoList__lists-list-imgWrap-img"
                       src={photo.image_url}
                       alt="photo"
                     ></img>
                   </div>
+                  <span>
+                    {imageLikes === 1
+                      ? `${imageLikes} like`
+                      : `${imageLikes} likes`}
+                  </span>
                 </li>
               );
             })}

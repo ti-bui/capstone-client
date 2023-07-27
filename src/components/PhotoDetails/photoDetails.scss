@@ -49,16 +49,27 @@
 
             &-imgWrap{
                 @include flex-box(column);
-                // height: 100vh;
+                position: relative;
+                cursor: pointer;
                 overflow: hidden;
                 width: 0;
+                border-radius: 3%;
+                // height: 100%;
                 align-items: center;
                 justify-content: center;
                 
 
                 &-img{
                     width: 100%;
-                    // height: 100%;
+                }
+                &-heartIcon{
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    filter: drop-shadow(0 19px 38px rgba(0, 0, 0, 0.7));
+                    transform-origin: center center;
+                    width: 100px;
                 }
             }
             &-num{
@@ -74,4 +85,5 @@
         }
     }
 }
+
 
