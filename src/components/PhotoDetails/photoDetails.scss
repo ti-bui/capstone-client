@@ -1,29 +1,9 @@
 @use '/src/styles/partials/mixins' as *;
 @use "/src/styles/partials/variables" as *;
 
-.red{
-    border: 3px solid red;
-}
-.blue{
-    border: 3px solid blue;
-}
-.green{
-    border: 3px solid green;
-}
 .header-animate{
-    // display: none;
-
-    @include tablet{
-        // display: contents;
-        font-size: 9rem;
-        height: 8.6rem;
-    }
-
-    @include desktop{
         font-size: 14rem;
-        height: 14rem;
-    }
- 
+        height: 17rem;
 }
 .cream{
     color: $cream;
@@ -32,41 +12,22 @@
 .photoList{
     height: 100vh;
     &__intro{
-        @include flex-box(column);
+        @include flex-box(column-reverse);
         align-items: center;
         justify-content: center;
 
         &-header{
-            font-size: 3rem;
-
-            @include tablet{
-                font-size: 9rem;
-                height: 8.6rem;
-                z-index: 1;
-            }
-
-            @include desktop{
-                font-size: 14rem;
-                height: 14rem;
-            }
+            font-size: 14rem;
+            height: 14rem;
+            z-index: 1; 
         }
-      
-
     }
 
     &__thumbnail{
-        margin: 1rem 0 3rem 0;
         overflow: hidden;
         width: 100%;
+        margin: 0;
 
-         
-        @include tablet{
-          margin-bottom: 0;
-
-        }
-        @include desktop{
-            // margin-bottom: 5rem;
-        }
 
         &-img{
             width: 100%;
@@ -75,20 +36,20 @@
     }
 
     &__lists{
-        // padding: 0 1rem;
+        padding: 0;
+        overflow: hidden;
+        // width: 600%;
+        // height: 100vh;
 
-        @include tablet{
-            padding: 0;
-            overflow: hidden;
-        }
         &-list{
                  @include flex-box(column);
                  justify-content: center;
                  align-items: center;
+                 height: 100vh;
 
             &-imgWrap{
                 @include flex-box(column);
-                height: 100vh;
+                // height: 100vh;
                 overflow: hidden;
                 width: 0;
                 align-items: center;

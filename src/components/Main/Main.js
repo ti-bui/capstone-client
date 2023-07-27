@@ -2,6 +2,7 @@ import "./main.scss";
 import { useEffect } from "react";
 import { gsap, Power3 } from "gsap";
 import { SplitText } from "gsap/all";
+import ScrollDown from "../ScrollDown/ScrollDown";
 
 gsap.registerPlugin(SplitText);
 
@@ -28,6 +29,7 @@ const Main = () => {
         <h3 className="main__subtexts-text">Xin Chào!</h3>
         <h3 className="main__subtexts-text">Hello!</h3>
       </div>
+      <ScrollDown />
     </section>
   );
 };

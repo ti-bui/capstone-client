@@ -2,35 +2,17 @@
 @use "/src/styles/partials/variables" as *;
 
 .main{
-    padding: 0 1.5rem;
+    padding: 0 4rem;
     width: 100%;
     @include flex-box(column);
     align-items: center;
     justify-content: center;
-    // height: 29vh;
-    height: 100vh;
+    height: 95vh;
     scroll-snap-align: start;
 
-    
-
-    @include tablet{
-        padding: 0 4rem;
-        // height: 41vh;
-        }
-    
    &__mainHeader{
-    font-size: 6rem;
-    height: 15vh;
-
-    @include tablet{
-        font-size: 18rem;
-        // height: 25vh;
-    }
-
-    @include desktop{
-        font-size: 25rem;
+    font-size: 25rem;
         height: 100vh;
-    }
     }
     &__subtexts{
         width: 100%;

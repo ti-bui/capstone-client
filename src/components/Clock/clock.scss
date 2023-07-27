@@ -1,0 +1,9 @@
+@use '/src/styles/partials/mixins' as *;
+@use "/src/styles/partials/variables" as *;
+
+.clock {
+    text-align: center;
+    margin-top: 8rem;
+    font-size: 3rem;
+    font-weight: bold;
+  }
