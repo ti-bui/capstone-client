@@ -45,26 +45,26 @@ const PhotoDetails = () => {
   });
 
   // PhotoList animation
-  // useEffect(() => {
-  //   let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
+  useEffect(() => {
+    let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
 
-  //   imgBlock.forEach((photo) => {
-  //     let tl = gsap.timeline({
-  //       scrollTrigger: {
-  //         markers: true,
-  //         start: "top top",
-  //         end: "bottom top",
-  //         trigger: ".photoList__lists-list",
-  //         scrub: 1,
-  //         toggleActions: "play resume reverse complete",
-  //       },
-  //     });
+    imgBlock.forEach((photo) => {
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          markers: true,
+          start: "top top",
+          end: "bottom top",
+          trigger: ".photoList__lists-list",
+          scrub: 1,
+          toggleActions: "play resume reverse complete",
+        },
+      });
 
-  //     tl.to(photo, {
-  //       width: "70%",
-  //     });
-  //   });
-  // });
+      tl.to(photo, {
+        width: "100%",
+      });
+    });
+  });
 
   //Header split text animation
   useEffect(() => {
@@ -142,7 +142,7 @@ const PhotoDetails = () => {
                     className={`card ${
                       isFlipped[photo.image_id] ? "is-flipped" : ""
                     }`}
-                    onClick={() => handleCardClick(photo.image_id)}
+                    // onClick={() => handleCardClick(photo.image_id)}
                   >
                     <div className="photoList__lists-list-cardWrap card__face--front">
                       <img
@@ -155,6 +155,9 @@ const PhotoDetails = () => {
                       <CommentForm photoId={photo.image_id} />
                     </div>
                   </div>
+                  <button
+                    onClick={() => handleCardClick(photo.image_id)}
+                  ></button>
                 </li>
               );
             })}
