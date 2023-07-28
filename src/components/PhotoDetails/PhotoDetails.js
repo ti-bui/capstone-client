@@ -1,28 +1,42 @@
 import "./photoDetails.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { SplitText, ScrollTrigger, ScrollSmoother } from "gsap/all";
 import BackToTopButton from "../BackToTopButton/BackToTopButton";
 import heartIcon from "../../assets/icons/heart-icon.svg";
+import messageIcon from "../../assets/icons/message-icon.svg";
 import CommentForm from "../CommentForm/CommentForm";
 
 gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
 
 const PhotoDetails = () => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [likes, setLikes] = useState({});
+  const [showHeart, setShowHeart] = useState({});
   const transition = { duration: 2, ease: [0.6, 0.01, -0.05, 0.9] };
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
   const albums_api = "http://localhost:3011/albums";
 
-  const handleCardClick = (imageId) => {
+  const handleCardFlip = (imageId) => {
     setIsFlipped((prevIsFlipped) => ({
       ...prevIsFlipped,
       [imageId]: !prevIsFlipped[imageId],
     }));
+  };
+
+  const handleDoubleClick = (imageId) => {
+    setLikes((prevLikes) => ({
+      ...prevLikes,
+      [imageId]: (prevLikes[imageId] || 0) + 1,
+    }));
+    setShowHeart((prevShowHeart) => ({ ...prevShowHeart, [imageId]: true }));
+    setTimeout(() => {
+      setShowHeart((prevShowHeart) => ({ ...prevShowHeart, [imageId]: false }));
+    }, 1000);
   };
 
   //Header animation move down y-axis
@@ -37,7 +51,7 @@ const PhotoDetails = () => {
         toggleClass: "cream",
         ease: "back",
         scrub: 1,
-        toggleActions: "play resume reverse reset",
+        // toggleActions: "play complete complete none",
       },
     });
 
@@ -45,26 +59,26 @@ const PhotoDetails = () => {
   });
 
   // PhotoList animation
-  useEffect(() => {
-    let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
+  // useEffect(() => {
+  //   let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
 
-    imgBlock.forEach((photo) => {
-      let tl = gsap.timeline({
-        scrollTrigger: {
-          markers: true,
-          start: "top top",
-          end: "bottom top",
-          trigger: ".photoList__lists-list",
-          scrub: 1,
-          toggleActions: "play resume reverse complete",
-        },
-      });
+  //   imgBlock.forEach((photo) => {
+  //     let tl = gsap.timeline({
+  //       scrollTrigger: {
+  //         markers: true,
+  //         start: "top top",
+  //         end: "bottom top",
+  //         trigger: ".photoList__lists-list",
+  //         scrub: 1,
+  //         toggleActions: "play resume reverse complete",
+  //       },
+  //     });
 
-      tl.to(photo, {
-        width: "100%",
-      });
-    });
-  });
+  //     tl.to(photo, {
+  //       width: "100%",
+  //     });
+  //   });
+  // });
 
   //Header split text animation
   useEffect(() => {
@@ -88,7 +102,7 @@ const PhotoDetails = () => {
     axios
       .get(`${albums_api}/${id}`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setPhotos(response.data);
       })
       .catch((error) => {
@@ -136,15 +150,27 @@ const PhotoDetails = () => {
         <ul className="photoList__lists green ">
           {photos.images &&
             photos.images.map((photo) => {
+              // console.log(photo.image_id);
+              const imageLikes = likes[photo.image_id] || 0;
+              const isShowHeart = showHeart[photo.image_id];
               return (
                 <li key={photo.image_id} className="photoList__lists-list ">
                   <div
                     className={`card ${
                       isFlipped[photo.image_id] ? "is-flipped" : ""
                     }`}
-                    // onClick={() => handleCardClick(photo.image_id)}
                   >
-                    <div className="photoList__lists-list-cardWrap card__face--front">
+                    <div
+                      onDoubleClick={() => handleDoubleClick(photo.image_id)}
+                      className="photoList__lists-list-cardWrap card__face--front"
+                    >
+                      {isShowHeart && (
+                        <img
+                          className="photoList__lists-list-cardWrap-heartIcon heart-icon"
+                          src={heartIcon}
+                          alt="heart-icon"
+                        />
+                      )}
                       <img
                         className="photoList__lists-list-cardWrap-img"
                         src={photo.image_url}
@@ -152,12 +178,26 @@ const PhotoDetails = () => {
                       ></img>
                     </div>
                     <div className="photoList__lists-list-cardWrap photoList__lists-list-cardWrap--back">
-                      <CommentForm photoId={photo.image_id} />
+                      <CommentForm
+                        albumId={photos.id}
+                        imageId={photo.image_id}
+                      />
                     </div>
                   </div>
-                  <button
-                    onClick={() => handleCardClick(photo.image_id)}
-                  ></button>
+                  <div className="photoList__lists-list-features">
+                    <span className="photoList__lists-list-features-like">
+                      {imageLikes === 1
+                        ? `${imageLikes} like`
+                        : `${imageLikes} likes`}
+                    </span>
+
+                    <img
+                      alt="message icon"
+                      src={messageIcon}
+                      className="photoList__lists-list-features-msg"
+                      onClick={() => handleCardFlip(photo.image_id)}
+                    />
+                  </div>
                 </li>
               );
             })}

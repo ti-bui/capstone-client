@@ -18,7 +18,7 @@ const PhotoList = ({ albums }) => {
 
     slides.forEach((slide, i) => {
       let bg = slide.querySelector(".imgWrap"),
-        content = slide.querySelector(".content"),
+        content = slide.querySelector(".title"),
         tl = gsap.timeline({
           scrollTrigger: {
             markers: true,
@@ -61,27 +61,27 @@ const PhotoList = ({ albums }) => {
       exit="exit"
       className="albumsList slides"
     >
-      <ul className="list">
+      <ul className="albumsList__list">
         {albums.map((album) => {
           return (
             <Link
               to={`/${album.id}`}
               key={album.id}
-              className="albumsList__album slide"
+              className="albumsList__list-album slide"
             >
-              <div className="albumsList__thumbnail imgWrap">
+              <div className="albumsList__list-album-thumbnail imgWrap">
                 <motion.img
                   whileHover={{ scale: 1.1 }}
                   transition={transition}
-                  className="albumsList__thumbnail-img img"
+                  className="albumsList__list-album-thumbnail-img img"
                   src={album.thumbnail}
                   alt={album.album_name}
                 />
               </div>
-              <div className="content"> {album.album_name}</div>
-              {/* <h3 className="albumsList__info">
-              / {album.album_name}-{album.year_taken}
-            </h3> */}
+              <div className="albumsList__list-album-title title">
+                {" "}
+                {album.album_name}
+              </div>
             </Link>
           );
         })}
