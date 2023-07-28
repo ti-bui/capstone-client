@@ -7,32 +7,22 @@ import { gsap } from "gsap";
 import { SplitText, ScrollTrigger, ScrollSmoother } from "gsap/all";
 import BackToTopButton from "../BackToTopButton/BackToTopButton";
 import heartIcon from "../../assets/icons/heart-icon.svg";
+import CommentForm from "../CommentForm/CommentForm";
 
 gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
 
 const PhotoDetails = () => {
+  const [isFlipped, setIsFlipped] = useState(false);
   const transition = { duration: 2, ease: [0.6, 0.01, -0.05, 0.9] };
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
   const albums_api = "http://localhost:3011/albums";
-  const [likes, setLikes] = useState({});
-  const [showHeart, setShowHeart] = useState({});
 
-  const handleDoubleClick = (imageId) => {
-    setLikes((prevLikes) => ({
-      ...prevLikes,
-      [imageId]: (prevLikes[imageId] || 0) + 1,
+  const handleCardClick = (imageId) => {
+    setIsFlipped((prevIsFlipped) => ({
+      ...prevIsFlipped,
+      [imageId]: !prevIsFlipped[imageId],
     }));
-    setShowHeart((prevShowHeart) => ({
-      ...prevShowHeart,
-      [imageId]: true,
-    }));
-    setTimeout(() => {
-      setShowHeart((prevShowHeart) => ({
-        ...prevShowHeart,
-        [imageId]: false,
-      }));
-    }, 1000);
   };
 
   //Header animation move down y-axis
@@ -54,27 +44,27 @@ const PhotoDetails = () => {
     tl.to(".header-animate", { y: 600, duration: 2 });
   });
 
-  //PhotoList animation
-  useEffect(() => {
-    let imgBlock = gsap.utils.toArray(".photoList__lists-list-imgWrap");
+  // PhotoList animation
+  // useEffect(() => {
+  //   let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
 
-    imgBlock.forEach((photo) => {
-      let tl = gsap.timeline({
-        scrollTrigger: {
-          markers: true,
-          start: "top top",
-          end: "bottom top",
-          trigger: ".photoList__lists-list",
-          scrub: 1,
-          toggleActions: "play resume reverse complete",
-        },
-      });
+  //   imgBlock.forEach((photo) => {
+  //     let tl = gsap.timeline({
+  //       scrollTrigger: {
+  //         markers: true,
+  //         start: "top top",
+  //         end: "bottom top",
+  //         trigger: ".photoList__lists-list",
+  //         scrub: 1,
+  //         toggleActions: "play resume reverse complete",
+  //       },
+  //     });
 
-      tl.to(photo, {
-        width: "70%",
-      });
-    });
-  });
+  //     tl.to(photo, {
+  //       width: "70%",
+  //     });
+  //   });
+  // });
 
   //Header split text animation
   useEffect(() => {
@@ -146,38 +136,25 @@ const PhotoDetails = () => {
         <ul className="photoList__lists green ">
           {photos.images &&
             photos.images.map((photo) => {
-              const imageId = photo.image_id;
-              const imageLikes = likes[imageId] || 0;
-              const isShowHeart = showHeart[imageId];
-
               return (
-                <li
-                  key={photo.image_id}
-                  className="photoList__lists-list blue "
-                >
+                <li key={photo.image_id} className="photoList__lists-list ">
                   <div
-                    onDoubleClick={() => handleDoubleClick(imageId)}
-                    onClick={handleDoubleClick}
-                    className="photoList__lists-list-imgWrap post"
+                    className={`card ${
+                      isFlipped[photo.image_id] ? "is-flipped" : ""
+                    }`}
+                    onClick={() => handleCardClick(photo.image_id)}
                   >
-                    {isShowHeart && (
+                    <div className="photoList__lists-list-cardWrap card__face--front">
                       <img
-                        className="photoList__lists-list-imgWrap-heartIcon heart-icon"
-                        src={heartIcon}
-                        alt="heart-icon"
-                      />
-                    )}
-                    <img
-                      className="photoList__lists-list-imgWrap-img"
-                      src={photo.image_url}
-                      alt="photo"
-                    ></img>
+                        className="photoList__lists-list-cardWrap-img"
+                        src={photo.image_url}
+                        alt="photo"
+                      ></img>
+                    </div>
+                    <div className="photoList__lists-list-cardWrap photoList__lists-list-cardWrap--back">
+                      <CommentForm photoId={photo.image_id} />
+                    </div>
                   </div>
-                  <span>
-                    {imageLikes === 1
-                      ? `${imageLikes} like`
-                      : `${imageLikes} likes`}
-                  </span>
                 </li>
               );
             })}
