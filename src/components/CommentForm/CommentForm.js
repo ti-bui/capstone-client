@@ -6,6 +6,7 @@ const CommentForm = ({ imageId, albumId }) => {
   const [selectedImage, setSelectedImage] = useState([]);
   const [messages, setMessages] = useState("");
   const [name, setName] = useState("");
+  const [isSubmit, setIsSubmit] = useState(false);
   const api = "http://localhost:3011/albums";
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const CommentForm = ({ imageId, albumId }) => {
       console.log("Submitted successfully");
 
       setSelectedImage([...selectedImage, { name, message: messages }]);
-
+      setIsSubmit(true);
       setName("");
       setMessages("");
     } catch (error) {
@@ -59,7 +60,7 @@ const CommentForm = ({ imageId, albumId }) => {
             placeholder="Your thoughts on this image.."
           ></textarea>
         </div>
-
+        {isSubmit === true && <div>Sent</div>}
         <button
           onClick={(e) => {
             e.stopPropagation();

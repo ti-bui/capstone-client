@@ -4,9 +4,7 @@
 .wrapper{
     height: 100%;
     width: 100%;
-    // background-color: paleturquoise;
     @include flex-box(column);
-    // justify-content: center;
     align-items: center;
 }
 
@@ -14,7 +12,6 @@
     background-color: $cream;
     height: 50%;
     width: 100%;
-    // padding: 2rem 7rem;
     @include flex-box(column);
     justify-content: center;
     align-items: center;
@@ -58,7 +55,9 @@
         background-color: rgba(195, 216, 79, 0.372) ;
        
     }
-    &__button:active{ transform: translateY(4px); box-shadow:-5px 7px 2px 1px rgba(195, 216, 79, 0.692);}
+    &__button:active{ 
+        transform: translateY(4px); 
+        box-shadow:-5px 7px 2px 1px rgba(195, 216, 79, 0.692);}
 }
 
 .posted{
@@ -66,10 +65,9 @@
     width: 70%;
     padding-right: 1rem;
     @include flex-box(column);
-    // justify-content: flex-start;
     align-items: flex-start;
     overflow:hidden; 
-    overflow-y:scroll;
+    // overflow-y:scroll;
 
     &__wrapper{
         padding: 1rem;
