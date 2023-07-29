@@ -27,6 +27,8 @@ const CommentForm = ({ imageId, albumId }) => {
       await axios.post(`${api}/${albumId}/${imageId}`, submitData);
       console.log("Submitted successfully");
 
+      setSelectedImage([...selectedImage, { name, message: messages }]);
+
       setName("");
       setMessages("");
     } catch (error) {
@@ -35,14 +37,12 @@ const CommentForm = ({ imageId, albumId }) => {
   };
 
   return (
-    <section>
-      <form onSubmit={handleSubmit} className="form">
+    <section className="wrapper">
+      <form required onSubmit={handleSubmit} className="form">
         <div className="form__container">
           <input
+            value={name}
             onChange={(e) => setName(e.target.value)}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
             className="form__container-input form__container-input--name"
             type="text"
             name="fullName"
@@ -51,10 +51,8 @@ const CommentForm = ({ imageId, albumId }) => {
           />
 
           <textarea
+            value={messages}
             onChange={(e) => setMessages(e.target.value)}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
             className="form__container-input form__container-input--comment"
             name="messages"
             required
@@ -72,12 +70,16 @@ const CommentForm = ({ imageId, albumId }) => {
           send
         </button>
       </form>
-      <ul>
+      <ul className="posted">
         {selectedImage.map((image) => {
           return (
-            <li key={image.name}>
-              <p>name{image.name}</p>
-              <p>message{image.message}</p>
+            <li className="posted__wrapper" key={image.mess_id}>
+              <p className="posted__wrapper-text posted__wrapper-text--name">
+                {image.name}
+              </p>
+              <p className="posted__wrapper-text posted__wrapper-text--msg">
+                {image.message}
+              </p>
             </li>
           );
         })}

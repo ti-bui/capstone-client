@@ -38,8 +38,6 @@
     &__lists{
         padding: 0;
         overflow: hidden;
-        // width: 600%;
-        // height: 100vh;
 
         &-list{
                  @include flex-box(column);
@@ -52,7 +50,7 @@
                 cursor: pointer;
                 overflow: hidden;
                 width: 100%;
-                height: 43rem;
+                height: 40rem;
                 border-radius: 3%;
                 backface-visibility: hidden;
                 box-shadow:-5px 7px 10px 1px rgba(0, 0, 0, 0.23);
@@ -60,38 +58,9 @@
              
                 &--back{
                     border: 2px solid black;
-                    background-color: lightcoral;
+                    background-color: $cream;
                     transform: rotateY(180deg);
                     
-                }
-                &-cmt{
-                   background-color: $cream;
-                    justify-content: left;
-                    align-items: flex-start;
-                    justify-content: center;
-                    height: 100%;
-                    width: 70%;
-                    padding: 2rem;
-                    @include flex-box(row);
-
-                    &-input{
-                    text-indent: 10%;
-                    width: 100%;
-                    height: 20%;
-                    margin-right: 2rem;
-                    border-radius: 1rem;
-                    border: 1px solid black;
-                    box-shadow:-5px 7px 2px 1px rgb(0, 0, 0);
-                    }
-                    &-button{
-                        width: 7rem;
-                        height: 3rem;
-                        border-radius: 0.5rem;
-                        border: 1px solid black;
-                        background-color: white;
-                        color: rgb(0, 0, 0);
-                        box-shadow:-5px 7px 2px 1px rgb(0, 0, 0);
-                    }
                 }
                 &-img{
                     width: 100%;
@@ -108,7 +77,6 @@
             }
             &-features{
                 width: 100%;
-                // height: 20%;
                 justify-content: center;
                 align-items: center;
                 @include flex-box(row);
@@ -121,10 +89,8 @@
                 }
                 &-msg{
                     width: 2rem;
-
                     margin: 0 3rem;
                     border-radius: 0.5rem;
-                    // box-shadow:-5px 7px 10px 1px rgba(0, 0, 0, 0.23);
                     background-color: rgba(255, 255, 255, 0);
                 }
 
