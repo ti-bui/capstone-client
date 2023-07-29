@@ -67,10 +67,8 @@
     @include flex-box(column);
     align-items: flex-start;
     overflow:hidden; 
-    // overflow-y:scroll;
 
     &__wrapper{
-        padding: 1rem;
         margin: 1rem 0;
         background-color: rgba(195, 216, 79, 0.372);
         @include flex-box(row);
@@ -78,7 +76,6 @@
         border-radius: 1.4rem;
 
         &-text{
-            
             padding: 0 1rem
         }
         &-text--name{
@@ -89,4 +86,12 @@
         
     }
   
+}
+
+.isSubmit{
+    @include flex-box(row);
+    color: green;
+    &__checkIcon{
+        width: 1.5rem;
+    }
 }

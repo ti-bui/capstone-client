@@ -1,18 +1,23 @@
 import "./photoDetails.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { SplitText, ScrollTrigger, ScrollSmoother } from "gsap/all";
 import BackToTopButton from "../BackToTopButton/BackToTopButton";
 import heartIcon from "../../assets/icons/heart-icon.svg";
 import messageIcon from "../../assets/icons/message-icon.svg";
+import fullscreenIcon from "../../assets/icons/fullscreen.svg";
 import CommentForm from "../CommentForm/CommentForm";
+import FullScreenModal from "../FullScreenModal/FullScreenModal";
 
 gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
 
 const PhotoDetails = () => {
+  const [fullscreenImg, setFullscreenImg] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [likes, setLikes] = useState({});
   const [showHeart, setShowHeart] = useState({});
@@ -20,6 +25,16 @@ const PhotoDetails = () => {
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
   const albums_api = "http://localhost:3011/albums";
+
+  const handleOpenModal = (photo) => {
+    setModalVisible(true);
+    setFullscreenImg(photo);
+  };
+
+  const handleCloseModal = (photo) => {
+    setModalVisible(false);
+    setFullscreenImg(null);
+  };
 
   const handleCardFlip = (imageId) => {
     setIsFlipped((prevIsFlipped) => ({
@@ -44,14 +59,12 @@ const PhotoDetails = () => {
     const tl = gsap.timeline({
       stagger: 0.3,
       scrollTrigger: {
-        // markers: true,
         trigger: ".photoList",
         start: "30% 20%",
-        end: "90% 20%",
+        end: "80% 20%",
         toggleClass: "cream",
         ease: "back",
         scrub: 1,
-        // toggleActions: "play complete complete none",
       },
     });
 
@@ -59,26 +72,26 @@ const PhotoDetails = () => {
   });
 
   // PhotoList animation
-  // useEffect(() => {
-  //   let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
+  useEffect(() => {
+    let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
 
-  //   imgBlock.forEach((photo) => {
-  //     let tl = gsap.timeline({
-  //       scrollTrigger: {
-  //         markers: true,
-  //         start: "top top",
-  //         end: "bottom top",
-  //         trigger: ".photoList__lists-list",
-  //         scrub: 1,
-  //         toggleActions: "play resume reverse complete",
-  //       },
-  //     });
+    imgBlock.forEach((photo) => {
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          markers: true,
+          start: "top top",
+          end: "bottom top",
+          trigger: ".photoList__lists-list",
+          scrub: 1,
+          toggleActions: "play resume complete complete",
+        },
+      });
 
-  //     tl.to(photo, {
-  //       width: "100%",
-  //     });
-  //   });
-  // });
+      tl.to(photo, {
+        width: "100%",
+      });
+    });
+  });
 
   //Header split text animation
   useEffect(() => {
@@ -102,7 +115,6 @@ const PhotoDetails = () => {
     axios
       .get(`${albums_api}/${id}`)
       .then((response) => {
-        // console.log(response.data);
         setPhotos(response.data);
       })
       .catch((error) => {
@@ -121,10 +133,13 @@ const PhotoDetails = () => {
         transition={{ duration: 2 }}
         className="photoList"
       >
+        {modalVisible && (
+          <FullScreenModal onClose={handleCloseModal} image={fullscreenImg} />
+        )}
         <div className="photoList__intro">
-          {/* <h2 className="photoList__intro-header">{photos.album_name} </h2> */}
-          <h2 className="header-animate">{photos.album_name} </h2>
-          {/* <h3 className="photoList__intro-year">{photos.year_taken}</h3> */}
+          <h2 className="photoList__intro-header header-animate">
+            {photos.album_name}{" "}
+          </h2>
         </div>
         <motion.div
           animate={{
@@ -150,20 +165,29 @@ const PhotoDetails = () => {
         <ul className="photoList__lists green ">
           {photos.images &&
             photos.images.map((photo) => {
-              // console.log(photo.image_id);
               const imageLikes = likes[photo.image_id] || 0;
               const isShowHeart = showHeart[photo.image_id];
               return (
                 <li key={photo.image_id} className="photoList__lists-list ">
+                  {/* {modalVisible && (
+                    <FullScreenmodalVisible image={photo.image_url} />
+                  )} */}
                   <div
                     className={`card ${
-                      isFlipped[photo.image_id] ? "is-flipped" : ""
+                      isFlipped[photo.image_id] ? "card--flip" : ""
                     }`}
                   >
                     <div
                       onDoubleClick={() => handleDoubleClick(photo.image_id)}
                       className="photoList__lists-list-cardWrap card__face--front"
                     >
+                      <img
+                        onClick={() => handleOpenModal(photo.image_url)}
+                        className="photoList__lists-list-cardWrap-fullscreen"
+                        src={fullscreenIcon}
+                        alt="fullscreen icon"
+                      />
+
                       {isShowHeart && (
                         <img
                           className="photoList__lists-list-cardWrap-heartIcon heart-icon"

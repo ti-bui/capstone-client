@@ -1,0 +1,41 @@
+@use '/src/styles/partials/mixins' as *;
+@use "/src/styles/partials/variables" as *;
+
+
+.modal{
+    @include flex-box(row);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 80vh;
+
+    &__overlay{
+            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.81);
+        
+}
+    &__content{
+        @include flex-box(row);
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        height: 100%;
+        overflow: hidden;
+        
+        &-img{
+            border-radius: 1%;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+}

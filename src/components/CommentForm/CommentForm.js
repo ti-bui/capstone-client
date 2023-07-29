@@ -1,6 +1,7 @@
 import "./commentForm.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import checkIcon from "../../assets/icons/check-mark.svg";
 
 const CommentForm = ({ imageId, albumId }) => {
   const [selectedImage, setSelectedImage] = useState([]);
@@ -8,6 +9,16 @@ const CommentForm = ({ imageId, albumId }) => {
   const [name, setName] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
   const api = "http://localhost:3011/albums";
+
+  useEffect(() => {
+    if (isSubmit) {
+      const timeout = setTimeout(() => {
+        setIsSubmit(false);
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isSubmit]);
 
   useEffect(() => {
     axios.get(`${api}/${albumId}/${imageId}`).then((response) => {
@@ -60,7 +71,16 @@ const CommentForm = ({ imageId, albumId }) => {
             placeholder="Your thoughts on this image.."
           ></textarea>
         </div>
-        {isSubmit === true && <div>Sent</div>}
+        {isSubmit === true && (
+          <div className="isSubmit">
+            <img
+              className="isSubmit__checkIcon"
+              src={checkIcon}
+              alt="check mark"
+            />
+            <p className="isSubmit__text"> Thank you {name}</p>
+          </div>
+        )}
         <button
           onClick={(e) => {
             e.stopPropagation();
