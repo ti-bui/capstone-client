@@ -3,6 +3,7 @@ import githubLogo from "../../assets/icons/github.svg";
 import linkedinLogo from "../../assets/icons/linkedin.svg";
 import instagramLogo from "../../assets/icons/instagram.svg";
 import AnimatedPage from "../../pages/AnimatedPage";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/all";
@@ -34,33 +35,40 @@ const About = () => {
             <p>Xin chào!</p>
             <p>Hello!</p>
           </div>
-          <div className="about__blocks-block split">
+          <p className="about__blocks-block split">
             I'm a passionate individual with a deep appreciation for both the
             digital and visual world. As a front-end developer and having
             photography background, I believe that combining technology and art
             allows me to express my creativity while making a meaningful impact.
-          </div>
-          <div className="about__blocks-block split">
-            Let's connect and embark on a journey of innovation and visual
-            storytelling together!
-          </div>
+          </p>
+          <p className="about__blocks-block split">
+            Check out more of my works on the links below.
+            <br /> Let's connect and feel free to hit me up for any exciting
+            collaborations! 😃🚀
+          </p>
         </article>
         <article className="about__logos ">
-          <img
-            src={instagramLogo}
-            alt="instagram"
-            className="about__logos-logo"
-          ></img>
-          <img
-            src={linkedinLogo}
-            alt="linkedin"
-            className="about__logos-logo"
-          ></img>
-          <img
-            src={githubLogo}
-            alt="github"
-            className="about__logos-logo"
-          ></img>
+          <Link target="_blank" to="https://www.instagram.com/tibui._/">
+            <img
+              src={instagramLogo}
+              alt="instagram"
+              className="about__logos-logo"
+            ></img>
+          </Link>
+          <Link target="_blank" to="https://www.linkedin.com/in/ti-bui/">
+            <img
+              src={linkedinLogo}
+              alt="linkedin"
+              className="about__logos-logo"
+            ></img>
+          </Link>
+          <Link target="_blank" to="https://github.com/ti-bui">
+            <img
+              src={githubLogo}
+              alt="github"
+              className="about__logos-logo"
+            ></img>
+          </Link>
         </article>
       </section>
     </AnimatedPage>

@@ -1,35 +1,61 @@
 @use '/src/styles/partials/mixins' as *;
 @use "/src/styles/partials/variables" as *;
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 .about{
-    color: $cream;
+    color: $black;
     height: 100vh;
-    background-color: $black;
+    background-color: $cream;
     padding: 0 1.5rem;
     @include flex-box(column);
     align-items: center;
+    // justify-content: center;
 
     &__header{
-        font-size: 3rem;
+        font-size: 5rem;
     }
     &__blocks{
-        padding: 1rem 0;
+        font-family: 'Roboto', sans-serif;
+        line-height: 180%;
+        border: 2px solid black;
+        background-color: $cream;
+        font-weight: bold;
+        border-radius: 3%;
+        width: 50%;
+        padding: 2rem ;
+        font-size: 1rem;
+        margin: 1rem 0;
+        // box-shadow:-2px 5px 2px 1px rgba(195, 216, 79, 0.692);
+        box-shadow: 0.5rem 0.5rem rgba(195, 216, 79, 0.692), -0.5rem -0.5rem rgba(240, 128, 128, 0.515);
 
         &-block{
-            font-size: 1rem;
+            font-weight: bolder;
             font-weight: 400;
             padding: 1rem 0;
+            letter-spacing: 200%;
         }
     }
     &__logos{
         padding: 2rem 0;
-        width: 100%;
+        width: 50%;
         @include flex-box(row);
-        align-items: baseline;
-        justify-content: space-evenly;
+        align-items: flex-start;
+        justify-content: flex-start;
 
         &-logo{
-            width: 24px;
+            margin-right: 2rem;
+            width: 3rem;
+            border: 1px solid black;
+            border-radius: 1rem;
+            background-color: $cream;
+            box-shadow:-2px 5px 2px 1px rgba(0, 0, 0, 0.23);
+        }
+        &-logo:hover{
+            background-color: rgba(195, 216, 79, 0.372) ;
+        }
+        &-logo:active{
+            transform: translateY(4px); 
+            box-shadow:-2px 5px 2px 1px rgba(195, 216, 79, 0.692);
         }
     }
 }
