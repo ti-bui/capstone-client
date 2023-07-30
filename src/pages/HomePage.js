@@ -1,10 +1,8 @@
 import "./homePage.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import Main from "../components/Main/Main";
 import PhotoList from "../components/PhotoList/PhotoList";
-import PhotoDetails from "../components/PhotoDetails/PhotoDetails";
 import BackToTopButton from "../components/BackToTopButton/BackToTopButton";
 
 const HomePage = () => {
