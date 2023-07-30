@@ -2,6 +2,8 @@
 @use "/src/styles/partials/variables" as *;
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
 .about{
     color: $black;
     height: 100vh;
@@ -24,7 +26,6 @@
         padding: 2rem ;
         font-size: 1rem;
         margin: 1rem 0;
-        // box-shadow: 0.5rem 0.5rem rgba(195, 216, 79, 0.692), -0.5rem -0.5rem rgba(240, 128, 128, 0.515);
         box-shadow: 0.5rem 0.5rem  rgba(240, 128, 128, 0.417), -0.5rem -0.5rem rgba(240, 128, 128, 0.515);
 
         &-block{

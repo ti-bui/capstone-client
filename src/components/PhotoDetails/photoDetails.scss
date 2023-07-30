@@ -1,7 +1,6 @@
 @use '/src/styles/partials/mixins' as *;
 @use "/src/styles/partials/variables" as *;
 
-
 .cream{
     color: $cream;
 }
@@ -36,6 +35,7 @@
         overflow: hidden;
 
         &-list{
+                padding: 0 5rem;
                  @include flex-box(column);
                  justify-content: center;
                  align-items: center;
@@ -71,13 +71,14 @@
                     width: 100px;
                 }
                 &-fullscreen{
+                    border-radius: 15%;
                     position: absolute;
-                    top: 2%;
+                    top: 2.5%;
                     right: 2%;
-                    width: 1.5rem;
+                    width: 1.5rem ;
                 }
                 &-fullscreen:hover{
-                    background-color: red;
+                    background-color: black;
                 }
             }
             &-features{
@@ -101,7 +102,6 @@
                 &-msg:hover{
                     background-color: rgba(195, 216, 79, 0.372);
                 }
-
             }
         }
     }
@@ -109,11 +109,12 @@
 
 
 .card {
+    padding: 0 4rem;
     @include flex-box(column);
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 70%;
+    width: 85%;
     height: 87%;
     cursor: pointer;
     transform-style: preserve-3d;

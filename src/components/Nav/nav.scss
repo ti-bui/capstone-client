@@ -30,13 +30,12 @@
         font-size: 1rem;
         font-weight: 400;
 
-
         &-home:hover{
             background-color: rgba(195, 216, 79, 0.372) ;
         }
         &-home:active{
-        transform: translateY(4px); 
-        box-shadow:-1px 2.5px 1px 3px rgb(195, 216, 79);
+            transform: translateY(4px); 
+            box-shadow:-1px 2.5px 1px 3px rgb(195, 216, 79);
         }
 
         &-about:hover{
@@ -52,7 +51,7 @@
         &-time:active{
             transform: translateY(4px); 
             box-shadow:-1px 2.5px 1px 3px rgba(173, 216, 230, 0.79) ;
-            }
+        }
     }
  
 }

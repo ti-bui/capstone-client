@@ -30,7 +30,7 @@ const PhotoDetails = () => {
     setFullscreenImg(photo);
   };
 
-  const handleCloseModal = (photo) => {
+  const handleCloseModal = () => {
     setModalVisible(false);
     setFullscreenImg(null);
   };
@@ -64,6 +64,7 @@ const PhotoDetails = () => {
         toggleClass: "cream",
         ease: "back",
         scrub: 1,
+        toggleActions: "play complete reverse reverse",
       },
     });
 
@@ -77,16 +78,17 @@ const PhotoDetails = () => {
     imgBlock.forEach((photo) => {
       let tl = gsap.timeline({
         scrollTrigger: {
+          markers: true,
           start: "top top",
-          end: "bottom top",
+          end: "70% top",
           trigger: ".photoList__lists-list",
           scrub: 1,
-          toggleActions: "play resume complete complete",
+          toggleActions: "play complete none complete",
         },
       });
 
       tl.to(photo, {
-        width: "100%",
+        width: "90%",
       });
     });
   });

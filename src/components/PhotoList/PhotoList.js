@@ -1,7 +1,7 @@
 import "./photoList.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { gsap } from "gsap";
 import { SplitText, ScrollTrigger } from "gsap/all";
 import BackToTopButton from "../BackToTopButton/BackToTopButton";

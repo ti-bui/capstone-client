@@ -2,7 +2,6 @@
 @use "/src/styles/partials/variables" as *;
 
 .main{
-
     padding: 0 4rem;
     width: 100%;
     height: 85vh;
@@ -22,9 +21,7 @@
 
    &__mainHeader{
          position: relative;
-         top: -9%;
+         top: -20%;
         font-size: 30rem;
-        
     }
-
 }

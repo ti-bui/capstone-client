@@ -26,7 +26,6 @@ const Main = () => {
       <div className="main__wrapper">
         <h1 className="main__mainHeader">Ti Bui</h1>
       </div>
-
       <ScrollDown />
     </section>
   );

@@ -16,13 +16,12 @@
     justify-content: center;
     align-items: center;
 
-
     &__container{
+        position: relative;
         width: 70%;
         @include flex-box(column);
         margin: 1rem 0;
       
-
         &-input{
             margin: 1rem 0;
             padding: 1rem;
@@ -40,6 +39,37 @@
             height: 2.5rem;
         }
     }
+
+    &__emojiWrap{
+        &-picker{
+            width: 50%;
+            position: absolute;
+            top: 8rem;
+            right: -10rem;
+        }
+        &-button{
+            position: absolute;
+            top: 6rem;
+            right: 1rem;
+            background: transparent;
+            outline: none;
+            border: none;
+
+            &-icon{
+                background-color: rgb(255, 233, 66);
+                border-radius: 50%;
+                 height: 1.5rem;
+                 width: 1,5rem;
+            }
+            &-icon:hover{
+                background-color: rgba(255, 239, 116, 0.964);
+                box-shadow:-2px 1px 2px 1px  rgba(255, 239, 116, 0.964);
+            }
+            &-icon:active{
+                transform: translateY(2px);
+            }
+        }
+}
 
     &__button{
         width: 7rem;

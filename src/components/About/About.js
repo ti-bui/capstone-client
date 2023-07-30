@@ -2,7 +2,7 @@ import "./about.scss";
 import githubLogo from "../../assets/icons/github.svg";
 import linkedinLogo from "../../assets/icons/linkedin.svg";
 import instagramLogo from "../../assets/icons/instagram.svg";
-import AnimatedPage from "../../pages/AnimatedPage";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { gsap } from "gsap";
@@ -18,17 +18,24 @@ const About = () => {
     const chars = splitText.chars;
 
     gsap.from(chars, {
-      duration: 1.5,
+      duration: 1,
       opacity: 0,
       scale: 0,
-      y: 10,
-      ease: "back",
+      y: 8,
     });
   }, []);
 
   return (
-    <AnimatedPage>
-      <section className="about">
+    <AnimatePresence>
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+        }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.7 }}
+        className="about"
+      >
         <h2 className="about__header">About Me</h2>
         <article className="about__blocks">
           <div className="about__blocks-bloc split">
@@ -42,8 +49,7 @@ const About = () => {
             allows me to express my creativity while making a meaningful impact.
           </p>
           <p className="about__blocks-block split">
-            Check out more of my works on the links below.
-            <br /> Let's connect and feel free to hit me up for any exciting
+            Let's connect and feel free to hit me up for any exciting
             collaborations! 😃🚀
           </p>
         </article>
@@ -70,8 +76,8 @@ const About = () => {
             ></img>
           </Link>
         </article>
-      </section>
-    </AnimatedPage>
+      </motion.section>
+    </AnimatePresence>
   );
 };
 

@@ -1,14 +1,27 @@
 import "./commentForm.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import emojiIcon from "../../assets/icons/emoji.svg";
 import checkIcon from "../../assets/icons/check-mark.svg";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 
 const CommentForm = ({ imageId, albumId }) => {
+  const [showEmojis, setShowEmojis] = useState(false);
   const [selectedImage, setSelectedImage] = useState([]);
   const [messages, setMessages] = useState("");
   const [name, setName] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
   const api = "http://localhost:3011/albums";
+
+  const addEmoji = (e) => {
+    let sym = e.unified.split("-");
+    let codesArray = [];
+    sym.forEach((el) => codesArray.push("0x" + el));
+    let emoji = String.fromCodePoint(...codesArray);
+    setMessages(messages + emoji);
+  };
 
   useEffect(() => {
     if (isSubmit) {
@@ -22,10 +35,9 @@ const CommentForm = ({ imageId, albumId }) => {
 
   useEffect(() => {
     axios.get(`${api}/${albumId}/${imageId}`).then((response) => {
-      console.log(response.data.messages);
       setSelectedImage(response.data.messages);
     });
-  }, []);
+  }, [albumId, imageId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,6 +82,36 @@ const CommentForm = ({ imageId, albumId }) => {
             required
             placeholder="Your thoughts on this image.."
           ></textarea>
+
+          <div className="form__emojiWrap">
+            {showEmojis && (
+              <div className="form__emojiWrap-picker">
+                <Picker
+                  className="form__emojiWrap-picker-box"
+                  data={data}
+                  onEmojiSelect={addEmoji}
+                  style={{
+                    position: "absolute",
+                    marginTop: "465px",
+                    marginLeft: -40,
+                    maxWidth: "320px",
+                    borderRadius: "20px",
+                  }}
+                  theme="dark"
+                />
+              </div>
+            )}
+            <div
+              onClick={() => setShowEmojis(!showEmojis)}
+              className="form__emojiWrap-button"
+            >
+              <img
+                className="form__emojiWrap-button-icon"
+                src={emojiIcon}
+                alt="emoji icon"
+              />
+            </div>
+          </div>
         </div>
         {isSubmit === true && (
           <div className="isSubmit">
@@ -78,33 +120,35 @@ const CommentForm = ({ imageId, albumId }) => {
               src={checkIcon}
               alt="check mark"
             />
-            <p className="isSubmit__text"> Thank you {name}</p>
+            <p className="isSubmit__text"> Sent</p>
           </div>
         )}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          className="form__button"
-          type="submit"
-        >
+
+        <button className="form__button" type="submit">
           send
         </button>
       </form>
-      <ul className="posted">
+      <section className="posted">
         {selectedImage.map((image) => {
           return (
-            <li className="posted__wrapper" key={image.mess_id}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+              }}
+              className="posted__wrapper"
+              key={image.mess_id}
+            >
               <p className="posted__wrapper-text posted__wrapper-text--name">
                 {image.name}
               </p>
               <p className="posted__wrapper-text posted__wrapper-text--msg">
                 {image.message}
               </p>
-            </li>
+            </motion.div>
           );
         })}
-      </ul>
+      </section>
     </section>
   );
 };
