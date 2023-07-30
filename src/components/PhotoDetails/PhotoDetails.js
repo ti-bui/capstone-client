@@ -2,10 +2,9 @@ import "./photoDetails.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
-import { SplitText, ScrollTrigger, ScrollSmoother } from "gsap/all";
+import { SplitText, ScrollTrigger } from "gsap/all";
 import BackToTopButton from "../BackToTopButton/BackToTopButton";
 import heartIcon from "../../assets/icons/heart-icon.svg";
 import messageIcon from "../../assets/icons/message-icon.svg";
@@ -13,7 +12,7 @@ import fullscreenIcon from "../../assets/icons/fullscreen.svg";
 import CommentForm from "../CommentForm/CommentForm";
 import FullScreenModal from "../FullScreenModal/FullScreenModal";
 
-gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const PhotoDetails = () => {
   const [fullscreenImg, setFullscreenImg] = useState(null);
@@ -78,7 +77,6 @@ const PhotoDetails = () => {
     imgBlock.forEach((photo) => {
       let tl = gsap.timeline({
         scrollTrigger: {
-          markers: true,
           start: "top top",
           end: "bottom top",
           trigger: ".photoList__lists-list",
@@ -169,9 +167,6 @@ const PhotoDetails = () => {
               const isShowHeart = showHeart[photo.image_id];
               return (
                 <li key={photo.image_id} className="photoList__lists-list ">
-                  {/* {modalVisible && (
-                    <FullScreenmodalVisible image={photo.image_url} />
-                  )} */}
                   <div
                     className={`card ${
                       isFlipped[photo.image_id] ? "card--flip" : ""
@@ -198,7 +193,7 @@ const PhotoDetails = () => {
                       <img
                         className="photoList__lists-list-cardWrap-img"
                         src={photo.image_url}
-                        alt="photo"
+                        alt="photos display"
                       ></img>
                     </div>
                     <div className="photoList__lists-list-cardWrap photoList__lists-list-cardWrap--back">
