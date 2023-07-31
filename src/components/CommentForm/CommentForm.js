@@ -90,13 +90,6 @@ const CommentForm = ({ imageId, albumId }) => {
                   className="form__emojiWrap-picker-box"
                   data={data}
                   onEmojiSelect={addEmoji}
-                  style={{
-                    position: "absolute",
-                    marginTop: "465px",
-                    marginLeft: -40,
-                    maxWidth: "320px",
-                    borderRadius: "20px",
-                  }}
                   theme="dark"
                 />
               </div>

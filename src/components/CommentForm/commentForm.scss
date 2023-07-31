@@ -1,5 +1,12 @@
 @use '/src/styles/partials/mixins' as *;
 @use "/src/styles/partials/variables" as *;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+em-emoji-picker{
+    height: 25rem;
+    width: 20rem;
+}
 
 .wrapper{
     height: 100%;
@@ -23,6 +30,9 @@
         margin: 1rem 0;
       
         &-input{
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
             margin: 1rem 0;
             padding: 1rem;
             text-indent: 1rem;
@@ -42,10 +52,14 @@
 
     &__emojiWrap{
         &-picker{
+            overflow: hidden;
+            height: 25rem;
             width: 50%;
             position: absolute;
             top: 8rem;
-            right: -10rem;
+            right: -7rem;
+
+           
         }
         &-button{
             position: absolute;
