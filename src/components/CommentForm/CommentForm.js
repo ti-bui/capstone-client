@@ -15,7 +15,6 @@ const CommentForm = ({ imageId, albumId }) => {
   const [messages, setMessages] = useState("");
   const [name, setName] = useState("");
   const [isSent, setIsSent] = useState(false);
-  const [isSending, setIsSending] = useState(false);
   const [messageToDelete, setMessageToDelete] = useState("");
   const [deleteModal, setDeleteModal] = useState(false);
 
@@ -39,6 +38,8 @@ const CommentForm = ({ imageId, albumId }) => {
     setMessages(messages + emoji);
   };
 
+  // timeout for "sent" text
+
   useEffect(() => {
     if (isSent) {
       const timeout = setTimeout(() => {
@@ -49,12 +50,6 @@ const CommentForm = ({ imageId, albumId }) => {
     }
   }, [isSent]);
 
-  useEffect(() => {
-    axios.get(`${api}/${albumId}/${imageId}`).then((response) => {
-      setSelectedImage(response.data.messages);
-    });
-  }, [albumId, imageId]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -64,21 +59,15 @@ const CommentForm = ({ imageId, albumId }) => {
     };
 
     try {
-      await axios.post(`${api}/${albumId}/${imageId}`, submitData);
+      const response = await axios.post(
+        `${api}/${albumId}/${imageId}`,
+        submitData
+      );
       console.log("Submitted successfully");
-      setSelectedImage([
-        ...selectedImage,
-        { name, message: messages, isTemp: true },
-      ]);
+      setSelectedImage([...selectedImage, response.data]);
       setIsSent(true);
       setName("");
       setMessages("");
-
-      setTimeout(() => {
-        setSelectedImage((prevImages) =>
-          prevImages.filter((image) => !image.isTemp)
-        );
-      }, 5000);
     } catch (error) {
       console.log("Error submitting message: ", error);
     }
@@ -153,11 +142,6 @@ const CommentForm = ({ imageId, albumId }) => {
             <p className="isSent__text">Sent</p>
           </div>
         )}
-        {/* {isSending && (
-          <div className="isSending">
-            <p className="isSending__text">Sending...</p>
-          </div>
-        )} */}
         <button className="form__button" type="submit">
           send
         </button>
