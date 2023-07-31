@@ -38,8 +38,6 @@ const CommentForm = ({ imageId, albumId }) => {
     setMessages(messages + emoji);
   };
 
-  // timeout for "sent" text
-
   useEffect(() => {
     if (isSent) {
       const timeout = setTimeout(() => {
