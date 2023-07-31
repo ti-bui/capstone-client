@@ -1,20 +1,27 @@
 import "./nav.scss";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Nav = () => {
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <nav className="nav">
-      <h3 className="nav__logo">Ti Bui</h3>
-      <div className="nav__links">
-        <span className="nav__links-link">about</span>,
-        <span className="nav__links-link">works</span>
-      </div>
-      <p className="nav__timezone">
-        {new Date().toLocaleString("en-US", {
-          month: "2-digit",
-          day: "2-digit",
-          year: "numeric",
-        })}
-      </p>
+      <Link to="/" className="nav__logo nav__links nav__links-home ">
+        home
+      </Link>
+      <Link to="/about" className="nav__links nav__links-about">
+        about
+      </Link>
+      <p className="nav__links-time nav__links">{date.toLocaleTimeString()}</p>
     </nav>
   );
 };

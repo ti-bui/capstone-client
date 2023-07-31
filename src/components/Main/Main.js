@@ -1,26 +1,33 @@
 import "./main.scss";
 import { useEffect } from "react";
 import { gsap, Power3 } from "gsap";
+import { SplitText } from "gsap/all";
+import ScrollDown from "../ScrollDown/ScrollDown";
+
+gsap.registerPlugin(SplitText);
 
 const Main = () => {
+  let mySplitText = new SplitText(".main__mainHeader", { type: "chars" });
+
+  let chars = mySplitText.chars;
+
   useEffect(() => {
-    gsap.to(".main__mainHeader", {
-      duration: 3,
+    gsap.to(chars, {
+      duration: 1,
       opacity: 1,
-      y: -20,
+      stagger: 0.1,
+      y: window.innerWidth > 768 ? "-40px" : "-20px",
       ease: Power3.easeOut,
     });
   });
 
   return (
-    <main className="main">
-      <h1 className="main__mainHeader">Ti Bui</h1>
-
-      <div className="main__subtexts">
-        <h3 className="main__subtexts-text">Xin Chào!</h3>
-        <h3 className="main__subtexts-text">Hello!</h3>
+    <section className="main">
+      <div className="main__wrapper">
+        <h1 className="main__mainHeader">Ti Bui</h1>
       </div>
-    </main>
+      <ScrollDown />
+    </section>
   );
 };
 
