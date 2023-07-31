@@ -15,7 +15,7 @@ const CommentForm = ({ imageId, albumId }) => {
   const [messages, setMessages] = useState("");
   const [name, setName] = useState("");
   const [isSent, setIsSent] = useState(false);
-  const [isSending, setIsSending] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [messageToDelete, setMessageToDelete] = useState("");
   const [deleteModal, setDeleteModal] = useState(false);
 
