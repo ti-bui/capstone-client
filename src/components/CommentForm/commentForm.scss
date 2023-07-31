@@ -113,6 +113,7 @@ em-emoji-picker{
     overflow:hidden; 
 
     &__wrapper{
+        position: relative;
         margin: 1rem 0;
         background-color: rgba(195, 216, 79, 0.372);
         @include flex-box(row);
@@ -127,7 +128,17 @@ em-emoji-picker{
             font-weight: 800;
         }
 
-        
+        &-delete{
+            position: absolute;
+            border-radius: 50%;
+            background-color: $cream;
+            top: -5px;
+            right: -5px;
+            width: 1.1rem;
+        }
+        &-delete:hover{
+            background-color: #f08080;
+        }
     }
   
 }

@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import emojiIcon from "../../assets/icons/emoji.svg";
 import checkIcon from "../../assets/icons/check-mark.svg";
+import deleteIcon from "../../assets/icons/delete.svg";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 const CommentForm = ({ imageId, albumId }) => {
   const [showEmojis, setShowEmojis] = useState(false);
@@ -13,7 +15,20 @@ const CommentForm = ({ imageId, albumId }) => {
   const [messages, setMessages] = useState("");
   const [name, setName] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
+  const [messageToDelete, setMessageToDelete] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+
   const api = "http://localhost:3011/albums";
+
+  const handleOpenModal = (message) => {
+    setDeleteModal(true);
+    setMessageToDelete(message);
+  };
+
+  const handleCloseModal = () => {
+    setDeleteModal(false);
+    setMessageToDelete("");
+  };
 
   const addEmoji = (e) => {
     let sym = e.unified.split("-");
@@ -48,10 +63,13 @@ const CommentForm = ({ imageId, albumId }) => {
     };
 
     try {
-      await axios.post(`${api}/${albumId}/${imageId}`, submitData);
+      const response = await axios.post(
+        `${api}/${albumId}/${imageId}`,
+        submitData
+      );
       console.log("Submitted successfully");
 
-      setSelectedImage([...selectedImage, { name, message: messages }]);
+      setSelectedImage([...selectedImage, response.data]);
       setIsSubmit(true);
       setName("");
       setMessages("");
@@ -62,6 +80,18 @@ const CommentForm = ({ imageId, albumId }) => {
 
   return (
     <section className="wrapper">
+      {deleteModal && (
+        <DeleteModal
+          setDeleteModal={setDeleteModal}
+          messages={selectedImage}
+          setMessages={setSelectedImage}
+          albumId={albumId}
+          imageId={imageId}
+          handleCloseModal={handleCloseModal}
+          messageToDelete={messageToDelete}
+          setMessageToDelete={setMessageToDelete}
+        />
+      )}
       <form required onSubmit={handleSubmit} className="form">
         <div className="form__container">
           <input
@@ -113,7 +143,7 @@ const CommentForm = ({ imageId, albumId }) => {
               src={checkIcon}
               alt="check mark"
             />
-            <p className="isSubmit__text"> Sent</p>
+            <p className="isSubmit__text">Sent</p>
           </div>
         )}
 
@@ -138,6 +168,12 @@ const CommentForm = ({ imageId, albumId }) => {
               <p className="posted__wrapper-text posted__wrapper-text--msg">
                 {image.message}
               </p>
+              <img
+                onClick={() => handleOpenModal(image.mess_id)}
+                className="posted__wrapper-delete"
+                src={deleteIcon}
+                alt="delete icon"
+              />
             </motion.div>
           );
         })}
