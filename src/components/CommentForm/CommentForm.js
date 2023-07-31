@@ -14,7 +14,8 @@ const CommentForm = ({ imageId, albumId }) => {
   const [selectedImage, setSelectedImage] = useState([]);
   const [messages, setMessages] = useState("");
   const [name, setName] = useState("");
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [messageToDelete, setMessageToDelete] = useState("");
   const [deleteModal, setDeleteModal] = useState(false);
 
@@ -39,14 +40,14 @@ const CommentForm = ({ imageId, albumId }) => {
   };
 
   useEffect(() => {
-    if (isSubmit) {
+    if (isSent) {
       const timeout = setTimeout(() => {
-        setIsSubmit(false);
+        setIsSent(false);
       }, 2000);
 
       return () => clearTimeout(timeout);
     }
-  }, [isSubmit]);
+  }, [isSent]);
 
   useEffect(() => {
     axios.get(`${api}/${albumId}/${imageId}`).then((response) => {
@@ -63,16 +64,21 @@ const CommentForm = ({ imageId, albumId }) => {
     };
 
     try {
-      const response = await axios.post(
-        `${api}/${albumId}/${imageId}`,
-        submitData
-      );
+      await axios.post(`${api}/${albumId}/${imageId}`, submitData);
       console.log("Submitted successfully");
-
-      setSelectedImage([...selectedImage, response.data]);
-      setIsSubmit(true);
+      setSelectedImage([
+        ...selectedImage,
+        { name, message: messages, isTemp: true },
+      ]);
+      setIsSent(true);
       setName("");
       setMessages("");
+
+      setTimeout(() => {
+        setSelectedImage((prevImages) =>
+          prevImages.filter((image) => !image.isTemp)
+        );
+      }, 5000);
     } catch (error) {
       console.log("Error submitting message: ", error);
     }
@@ -136,21 +142,27 @@ const CommentForm = ({ imageId, albumId }) => {
             </div>
           </div>
         </div>
-        {isSubmit === true && (
-          <div className="isSubmit">
+
+        {isSent === true && (
+          <div className="isSent">
             <img
-              className="isSubmit__checkIcon"
+              className="isSent__checkIcon"
               src={checkIcon}
               alt="check mark"
             />
-            <p className="isSubmit__text">Sent</p>
+            <p className="isSent__text">Sent</p>
           </div>
         )}
-
+        {/* {isSending && (
+          <div className="isSending">
+            <p className="isSending__text">Sending...</p>
+          </div>
+        )} */}
         <button className="form__button" type="submit">
           send
         </button>
       </form>
+
       <section className="posted">
         {selectedImage.map((image) => {
           return (
