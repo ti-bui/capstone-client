@@ -1,0 +1,152 @@
+@use '/src/styles/partials/mixins' as *;
+@use "/src/styles/partials/variables" as *;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+em-emoji-picker{
+    height: 25rem;
+    width: 20rem;
+}
+
+.wrapper{
+    height: 100%;
+    width: 100%;
+    @include flex-box(column);
+    align-items: center;
+}
+
+.form{
+    background-color: $cream;
+    height: 50%;
+    width: 100%;
+    @include flex-box(column);
+    justify-content: center;
+    align-items: center;
+
+    &__container{
+        position: relative;
+        width: 70%;
+        @include flex-box(column);
+        margin: 1rem 0;
+      
+        &-input{
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            text-indent: 1rem;
+            width: 100%;
+            height: 5rem;
+            border-radius: 1rem;
+            border: 1px solid black;
+            box-shadow:-5px 7px 2px 1px rgb(0, 0, 0);
+        }
+        &-input::placeholder{
+            font-size: 0.7rem;
+        }
+        &-input--name{
+            height: 2.5rem;
+        }
+    }
+
+    &__emojiWrap{
+        &-picker{
+            overflow: hidden;
+            height: 25rem;
+            width: 50%;
+            position: absolute;
+            top: 8rem;
+            right: -7rem;
+
+           
+        }
+        &-button{
+            position: absolute;
+            top: 6rem;
+            right: 1rem;
+            background: transparent;
+            outline: none;
+            border: none;
+
+            &-icon{
+                background-color: rgb(255, 233, 66);
+                border-radius: 50%;
+                 height: 1.5rem;
+                 width: 1,5rem;
+            }
+            &-icon:hover{
+                background-color: rgba(255, 239, 116, 0.964);
+                box-shadow:-2px 1px 2px 1px  rgba(255, 239, 116, 0.964);
+            }
+            &-icon:active{
+                transform: translateY(2px);
+            }
+        }
+}
+
+    &__button{
+        width: 7rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+        border: 1px solid black;
+        background-color: $cream;
+        color: rgb(0, 0, 0);
+        box-shadow:-5px 7px 2px 1px rgb(0, 0, 0);
+    }
+    &__button:hover{
+        font-weight: bold;
+        background-color: rgba(195, 216, 79, 0.372) ;
+       
+    }
+    &__button:active{ 
+        transform: translateY(4px); 
+        box-shadow:-5px 7px 2px 1px rgba(195, 216, 79, 0.692);}
+}
+
+.posted{
+    height: 50%;
+    width: 70%;
+    padding-right: 1rem;
+    @include flex-box(column);
+    align-items: flex-start;
+    overflow:hidden; 
+
+    &__wrapper{
+        position: relative;
+        margin: 1rem 0;
+        background-color: rgba(195, 216, 79, 0.372);
+        @include flex-box(row);
+        border: 1px solid black;
+        border-radius: 1.4rem;
+
+        &-text{
+            padding: 0 1rem
+        }
+        &-text--name{
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        &-delete{
+            position: absolute;
+            border-radius: 50%;
+            background-color: $cream;
+            top: -5px;
+            right: -5px;
+            width: 1.1rem;
+        }
+        &-delete:hover{
+            background-color: #f08080;
+        }
+    }
+  
+}
+
+.isSubmit{
+    @include flex-box(row);
+    color: green;
+    &__checkIcon{
+        width: 1.5rem;
+    }
+}

@@ -1,4 +1,3 @@
-import Clock from "../Clock/Clock";
 import "./nav.scss";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -16,13 +15,13 @@ const Nav = () => {
 
   return (
     <nav className="nav">
-      <Link to="/" className="nav__logo">
-        Home
+      <Link to="/" className="nav__logo nav__links nav__links-home ">
+        home
       </Link>
-      <Link to="/about" className="nav__links">
+      <Link to="/about" className="nav__links nav__links-about">
         about
       </Link>
-      <p className="nav__timezone">{date.toLocaleTimeString()}</p>
+      <p className="nav__links-time nav__links">{date.toLocaleTimeString()}</p>
     </nav>
   );
 };

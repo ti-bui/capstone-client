@@ -4,54 +4,91 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
-import { SplitText, ScrollTrigger, ScrollSmoother } from "gsap/all";
+import { SplitText, ScrollTrigger } from "gsap/all";
 import BackToTopButton from "../BackToTopButton/BackToTopButton";
+import heartIcon from "../../assets/icons/heart-icon.svg";
+import messageIcon from "../../assets/icons/message-icon.svg";
+import fullscreenIcon from "../../assets/icons/fullscreen.svg";
+import CommentForm from "../CommentForm/CommentForm";
+import FullScreenModal from "../FullScreenModal/FullScreenModal";
 
-gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const PhotoDetails = () => {
+  const [fullscreenImg, setFullscreenImg] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [likes, setLikes] = useState({});
+  const [showHeart, setShowHeart] = useState({});
   const transition = { duration: 2, ease: [0.6, 0.01, -0.05, 0.9] };
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
   const albums_api = "http://localhost:3011/albums";
+
+  const handleOpenModal = (photo) => {
+    setModalVisible(true);
+    setFullscreenImg(photo);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+    setFullscreenImg(null);
+  };
+
+  const handleCardFlip = (imageId) => {
+    setIsFlipped((prevIsFlipped) => ({
+      ...prevIsFlipped,
+      [imageId]: !prevIsFlipped[imageId],
+    }));
+  };
+
+  const handleDoubleClick = (imageId) => {
+    setLikes((prevLikes) => ({
+      ...prevLikes,
+      [imageId]: (prevLikes[imageId] || 0) + 1,
+    }));
+    setShowHeart((prevShowHeart) => ({ ...prevShowHeart, [imageId]: true }));
+    setTimeout(() => {
+      setShowHeart((prevShowHeart) => ({ ...prevShowHeart, [imageId]: false }));
+    }, 1000);
+  };
 
   //Header animation move down y-axis
   useEffect(() => {
     const tl = gsap.timeline({
       stagger: 0.3,
       scrollTrigger: {
-        // markers: true,
         trigger: ".photoList",
         start: "30% 20%",
-        end: "90% 20%",
+        end: "80% 20%",
         toggleClass: "cream",
         ease: "back",
         scrub: 1,
-        toggleActions: "play resume reverse reset",
+        toggleActions: "play complete reverse reverse",
       },
     });
 
     tl.to(".header-animate", { y: 600, duration: 2 });
   });
 
-  //PhotoList animation
+  // PhotoList animation
   useEffect(() => {
-    let imgBlock = gsap.utils.toArray(".photoList__lists-list-imgWrap");
+    let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
 
     imgBlock.forEach((photo) => {
       let tl = gsap.timeline({
         scrollTrigger: {
           markers: true,
           start: "top top",
-          end: "bottom top",
+          end: "70% top",
           trigger: ".photoList__lists-list",
           scrub: 1,
-          // toggleActions: "play resume reverse reset",
+          toggleActions: "play complete none complete",
         },
       });
 
       tl.to(photo, {
-        width: "70%",
+        width: "90%",
       });
     });
   });
@@ -78,7 +115,6 @@ const PhotoDetails = () => {
     axios
       .get(`${albums_api}/${id}`)
       .then((response) => {
-        console.log(response.data);
         setPhotos(response.data);
       })
       .catch((error) => {
@@ -97,10 +133,13 @@ const PhotoDetails = () => {
         transition={{ duration: 2 }}
         className="photoList"
       >
+        {modalVisible && (
+          <FullScreenModal onClose={handleCloseModal} image={fullscreenImg} />
+        )}
         <div className="photoList__intro">
-          {/* <h2 className="photoList__intro-header">{photos.album_name} </h2> */}
-          <h2 className="header-animate">{photos.album_name} </h2>
-          {/* <h3 className="photoList__intro-year">{photos.year_taken}</h3> */}
+          <h2 className="photoList__intro-header header-animate">
+            {photos.album_name}{" "}
+          </h2>
         </div>
         <motion.div
           animate={{
@@ -126,17 +165,59 @@ const PhotoDetails = () => {
         <ul className="photoList__lists green ">
           {photos.images &&
             photos.images.map((photo) => {
+              const imageLikes = likes[photo.image_id] || 0;
+              const isShowHeart = showHeart[photo.image_id];
               return (
-                <li
-                  key={photo.image_id}
-                  className="photoList__lists-list blue "
-                >
-                  <div className="photoList__lists-list-imgWrap red">
+                <li key={photo.image_id} className="photoList__lists-list ">
+                  <div
+                    className={`card ${
+                      isFlipped[photo.image_id] ? "card--flip" : ""
+                    }`}
+                  >
+                    <div
+                      onDoubleClick={() => handleDoubleClick(photo.image_id)}
+                      className="photoList__lists-list-cardWrap card__face--front"
+                    >
+                      <img
+                        onClick={() => handleOpenModal(photo.image_url)}
+                        className="photoList__lists-list-cardWrap-fullscreen"
+                        src={fullscreenIcon}
+                        alt="fullscreen icon"
+                      />
+
+                      {isShowHeart && (
+                        <img
+                          className="photoList__lists-list-cardWrap-heartIcon heart-icon"
+                          src={heartIcon}
+                          alt="heart-icon"
+                        />
+                      )}
+                      <img
+                        className="photoList__lists-list-cardWrap-img"
+                        src={photo.image_url}
+                        alt="photos display"
+                      ></img>
+                    </div>
+                    <div className="photoList__lists-list-cardWrap photoList__lists-list-cardWrap--back">
+                      <CommentForm
+                        albumId={photos.id}
+                        imageId={photo.image_id}
+                      />
+                    </div>
+                  </div>
+                  <div className="photoList__lists-list-features">
+                    <span className="photoList__lists-list-features-like">
+                      {imageLikes === 1
+                        ? `${imageLikes} like`
+                        : `${imageLikes} likes`}
+                    </span>
+
                     <img
-                      className="photoList__lists-list-imgWrap-img"
-                      src={photo.image_url}
-                      alt="photo"
-                    ></img>
+                      alt="message icon"
+                      src={messageIcon}
+                      className="photoList__lists-list-features-msg"
+                      onClick={() => handleCardFlip(photo.image_id)}
+                    />
                   </div>
                 </li>
               );
