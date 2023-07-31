@@ -1,4 +1,3 @@
-import "./homePage.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Main from "../components/Main/Main";
@@ -17,11 +16,11 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="container">
+    <>
       <Main />
       <PhotoList albums={albums} />
       <BackToTopButton />
-    </div>
+    </>
   );
 };
 

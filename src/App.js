@@ -1,19 +1,17 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-//pages
+
 import HomePage from "./pages/HomePage";
 import PhotoDetails from "./components/PhotoDetails/PhotoDetails";
 import About from "./components/About/About";
 import Nav from "./components/Nav/Nav";
 import ScrollToTopOnRouteChange from "./components/ScrollToTop/ScrollToTop";
-import CommentForm from "./components/CommentForm/CommentForm";
 
 function App() {
   return (
     <BrowserRouter>
       <Nav />
-      {/* <About /> */}
       <AnimatePresence initial={false} wait>
         <ScrollToTopOnRouteChange />
         <Routes>

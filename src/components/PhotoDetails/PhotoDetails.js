@@ -56,7 +56,6 @@ const PhotoDetails = () => {
       .then((response) => {
         console.log("Likes count updated successfully:", response.data);
 
-        // Update the likes count locally to reflect the changes
         setLikes((prevLikes) => ({
           ...prevLikes,
           [imageId]: updatedLikesCount,
@@ -85,7 +84,6 @@ const PhotoDetails = () => {
     tl.to(".header-animate", { y: 600, duration: 2 });
   });
 
-  // PhotoList animation
   useEffect(() => {
     let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
 
@@ -107,7 +105,6 @@ const PhotoDetails = () => {
     });
   });
 
-  //Header split text animation
   useEffect(() => {
     let mySplitText = new SplitText(".photoList__intro", {
       type: "chars",
@@ -124,7 +121,6 @@ const PhotoDetails = () => {
     });
   });
 
-  //API call
   useEffect(() => {
     axios
       .get(`${albums_api}/${id}`)
@@ -222,7 +218,6 @@ const PhotoDetails = () => {
                   </div>
                   <div className="photoList__lists-list-features">
                     <span className="photoList__lists-list-features-like">
-                      {/* {photo.likes} */}
                       {imageLikes === 1
                         ? `${imageLikes} like`
                         : `${imageLikes} likes`}

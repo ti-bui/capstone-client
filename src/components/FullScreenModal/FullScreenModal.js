@@ -1,6 +1,4 @@
-import ResponsiveModal from "react-responsive-modal";
 import "./fullScreenModal.scss";
-import { useState } from "react";
 
 const FullScreenModal = ({ onClose, image }) => {
   return (

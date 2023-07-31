@@ -79,7 +79,6 @@ const PhotoList = ({ albums }) => {
                 />
               </div>
               <div className="albumsList__list-album-title title">
-                {" "}
                 {album.album_name}
               </div>
             </Link>
