@@ -21,7 +21,6 @@ const PhotoList = ({ albums }) => {
         content = slide.querySelector(".title"),
         tl = gsap.timeline({
           scrollTrigger: {
-            markers: true,
             trigger: slide,
             start: () => (i ? "top bottom" : "top top"),
             end: "bottom top",

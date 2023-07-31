@@ -66,7 +66,6 @@ const PhotoDetails = () => {
       });
   };
 
-  //Header animation move down y-axis
   useEffect(() => {
     const tl = gsap.timeline({
       stagger: 0.3,
@@ -90,7 +89,6 @@ const PhotoDetails = () => {
     imgBlock.forEach((photo) => {
       let tl = gsap.timeline({
         scrollTrigger: {
-          markers: true,
           start: "top top",
           end: "70% top",
           trigger: ".photoList__lists-list",
