@@ -43,14 +43,28 @@ const PhotoDetails = () => {
   };
 
   const handleDoubleClick = (imageId) => {
-    setLikes((prevLikes) => ({
-      ...prevLikes,
-      [imageId]: (prevLikes[imageId] || 0) + 1,
-    }));
     setShowHeart((prevShowHeart) => ({ ...prevShowHeart, [imageId]: true }));
+
     setTimeout(() => {
       setShowHeart((prevShowHeart) => ({ ...prevShowHeart, [imageId]: false }));
     }, 1000);
+
+    const updatedLikesCount = (likes[imageId] || 0) + 1;
+
+    axios
+      .put(`${albums_api}/${id}/${imageId}`, { likes: updatedLikesCount })
+      .then((response) => {
+        console.log("Likes count updated successfully:", response.data);
+
+        // Update the likes count locally to reflect the changes
+        setLikes((prevLikes) => ({
+          ...prevLikes,
+          [imageId]: updatedLikesCount,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error updating likes count:", error);
+      });
   };
 
   //Header animation move down y-axis
@@ -200,6 +214,7 @@ const PhotoDetails = () => {
                     </div>
                     <div className="photoList__lists-list-cardWrap photoList__lists-list-cardWrap--back">
                       <CommentForm
+                        likes={likes}
                         albumId={photos.id}
                         imageId={photo.image_id}
                       />
@@ -207,6 +222,7 @@ const PhotoDetails = () => {
                   </div>
                   <div className="photoList__lists-list-features">
                     <span className="photoList__lists-list-features-like">
+                      {/* {photo.likes} */}
                       {imageLikes === 1
                         ? `${imageLikes} like`
                         : `${imageLikes} likes`}

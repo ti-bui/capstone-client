@@ -143,7 +143,7 @@ em-emoji-picker{
   
 }
 
-.isSubmit{
+.isSent{
     @include flex-box(row);
     color: green;
     &__checkIcon{
