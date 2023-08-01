@@ -44,7 +44,7 @@ const About = () => {
           </div>
           <p className="about__blocks-block split">
             I'm a passionate individual with a deep appreciation for both the
-            digital and visual world. As a software engineer and having
+            digital and visual world. As a software developer and having
             photography background, I believe that combining technology and art
             allows me to express my creativity while making a meaningful impact.
           </p>
