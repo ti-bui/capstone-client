@@ -10,7 +10,7 @@ const DeleteModal = ({
   albumId,
   imageId,
 }) => {
-  const api = "https://capstone-server-djrs.onrender.com/albums";
+  const api = "https://capstone-server-67ff.onrender.com/albums";
   const handleDelete = () => {
     if (messageToDelete) {
       axios

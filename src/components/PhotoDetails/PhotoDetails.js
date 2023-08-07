@@ -23,7 +23,7 @@ const PhotoDetails = () => {
   const transition = { duration: 2, ease: [0.6, 0.01, -0.05, 0.9] };
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
-  const albums_api = "https://capstone-server-djrs.onrender.com/albums";
+  const albums_api = "https://capstone-server-67ff.onrender.com/albums";
 
   const handleOpenModal = (photo) => {
     setModalVisible(true);

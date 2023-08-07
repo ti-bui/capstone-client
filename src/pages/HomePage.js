@@ -5,7 +5,7 @@ import PhotoList from "../components/PhotoList/PhotoList";
 import BackToTopButton from "../components/BackToTopButton/BackToTopButton";
 
 const HomePage = () => {
-  const albums_api = "http://localhost:3011/albums";
+  const albums_api = "https://capstone-server-67ff.onrender.com/albums";
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
