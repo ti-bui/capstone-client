@@ -10,7 +10,6 @@ const HomePage = () => {
 
   useEffect(() => {
     axios.get(`${albums_api}`).then((response) => {
-      console.log(response.data);
       setAlbums(response.data);
     });
   }, []);
