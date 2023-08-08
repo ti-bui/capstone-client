@@ -17,6 +17,7 @@
         overflow:hidden; 
     }
 
+
     &__wrapper{
         @include flex-box(column);
         align-items: center;
@@ -36,6 +37,10 @@
         font-size: 5.5rem;
 
         @include tablet{
+            font-size: 17rem;
+            
+        }
+        @include desktop{
             font-size: 30rem;
             top: -20%;
         }

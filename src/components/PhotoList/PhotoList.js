@@ -9,49 +9,49 @@ import BackToTopButton from "../BackToTopButton/BackToTopButton";
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const PhotoList = ({ albums }) => {
-  const transition = { duration: 2, ease: [0.6, 0.01, -0.05, 0.9] };
+  // const transition = { duration: 2, ease: [0.6, 0.01, -0.05, 0.9] };
 
-  useEffect(() => {
-    let slides = gsap.utils.toArray(".slide");
-    let getRatio = (el) =>
-      window.innerHeight / (window.innerHeight + el.offsetHeight);
+  // useEffect(() => {
+  //   let slides = gsap.utils.toArray(".slide");
+  //   let getRatio = (el) =>
+  //     window.innerHeight / (window.innerHeight + el.offsetHeight);
 
-    slides.forEach((slide, i) => {
-      let bg = slide.querySelector(".imgWrap"),
-        content = slide.querySelector(".title"),
-        tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: slide,
-            start: () => (i ? "top bottom" : "top top"),
-            end: "bottom top",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        });
+  //   slides.forEach((slide, i) => {
+  //     let bg = slide.querySelector(".imgWrap"),
+  //       content = slide.querySelector(".title"),
+  //       tl = gsap.timeline({
+  //         scrollTrigger: {
+  //           trigger: slide,
+  //           start: () => (i ? "top bottom" : "top top"),
+  //           end: "bottom top",
+  //           scrub: true,
+  //           invalidateOnRefresh: true,
+  //         },
+  //       });
 
-      tl.fromTo(
-        bg,
-        {
-          y: () => (i ? -window.innerHeight * getRatio(slide) : 0),
-        },
-        {
-          y: () => window.innerHeight * (1 - getRatio(slide)),
-          ease: "none",
-        }
-      );
-      tl.fromTo(
-        content,
-        {
-          y: () => (i ? window.innerHeight * -getRatio(slide) * 2 : 0),
-        },
-        {
-          y: () => window.innerHeight * getRatio(slide) * 2,
-          ease: "none",
-        },
-        0
-      );
-    });
-  });
+  //     tl.fromTo(
+  //       bg,
+  //       {
+  //         y: () => (i ? -window.innerHeight * getRatio(slide) : 0),
+  //       },
+  //       {
+  //         y: () => window.innerHeight * (1 - getRatio(slide)),
+  //         ease: "none",
+  //       }
+  //     );
+  //     tl.fromTo(
+  //       content,
+  //       {
+  //         y: () => (i ? window.innerHeight * -getRatio(slide) * 2 : 0),
+  //       },
+  //       {
+  //         y: () => window.innerHeight * getRatio(slide) * 2,
+  //         ease: "none",
+  //       },
+  //       0
+  //     );
+  //   });
+  // });
 
   return (
     <motion.section
@@ -71,7 +71,7 @@ const PhotoList = ({ albums }) => {
               <div className="albumsList__list-album-thumbnail imgWrap">
                 <motion.img
                   whileHover={{ scale: 1.1 }}
-                  transition={transition}
+                  // transition={transition}
                   className="albumsList__list-album-thumbnail-img img"
                   src={album.thumbnail}
                   alt={album.album_name}
