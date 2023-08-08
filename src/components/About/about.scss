@@ -13,7 +13,11 @@
     align-items: center;
 
     &__header{
-        font-size: 5rem;
+        font-size: 3.5rem;
+        @include tablet{
+            font-size: 5rem;
+
+        }
     }
     &__blocks{
         font-family: 'Roboto', sans-serif;
@@ -22,11 +26,21 @@
         background-color: $cream;
         font-weight: bold;
         border-radius: 3%;
-        width: 50%;
-        padding: 2rem ;
-        font-size: 1rem;
-        margin: 1rem 0;
+        padding: 1rem;
+        font-size: 0.8rem;
+        margin: 1rem;
         box-shadow: 0.5rem 0.5rem  rgba(240, 128, 128, 0.417), -0.5rem -0.5rem rgba(240, 128, 128, 0.515);
+
+        @include tablet{
+            width: 75%;
+            padding: 2rem ;
+            font-size: 1rem;
+            margin: 1rem 0;
+        }
+
+        @include desktop{
+            width: 50%;
+        }
 
         &-block{
             font-weight: bolder;
@@ -36,11 +50,16 @@
         }
     }
     &__logos{
+        margin: 1rem;
+        width: 100%;
+        @include flex-box(row);
+        align-items: center;
+        justify-content: center;
+
+        @include tablet{
         padding: 2rem 0;
         width: 50%;
-        @include flex-box(row);
-        align-items: flex-start;
-        justify-content: flex-start;
+        }
 
         &-logo{
             margin-right: 2rem;
