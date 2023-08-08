@@ -23,7 +23,7 @@
         position: relative;
         width: 100%;
         overflow: hidden;
-        top: 66%;
+        top: 70%;
 
         @include tablet{
             top: 0;
@@ -32,11 +32,12 @@
 
    &__mainHeader{
          position: relative;
-         top: -20%;
+         top: 16%;
         font-size: 5.5rem;
 
         @include tablet{
             font-size: 30rem;
+            top: -20%;
         }
     }
 }
