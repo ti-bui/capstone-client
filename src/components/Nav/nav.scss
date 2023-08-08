@@ -13,6 +13,9 @@
     @include tablet{
         padding: 2rem 4rem;
     }
+    @include desktop{
+        padding: 1rem 1rem 0 1rem;
+    }
     
     &__logo{
         font-size: 1rem;
@@ -20,7 +23,7 @@
     }
 
     &__links{
-        padding: 0 2rem;
+        padding: 0 0.5rem;
         height: 2rem;
         border-radius: 0.5rem;
         border: 1px solid black;
@@ -29,6 +32,11 @@
         box-shadow: -1px 2.5px 1px 3px rgba(0, 0, 0, 0.334);
         font-size: 1rem;
         font-weight: 400;
+
+        @include tablet{
+            padding: 0 2rem;
+            height: 2rem;
+        }
 
         &-home:hover{
             background-color: rgba(195, 216, 79, 0.372) ;

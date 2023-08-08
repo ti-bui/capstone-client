@@ -2,14 +2,20 @@
 @use "/src/styles/partials/variables" as *;
 
 .main{
-    padding: 0 4rem;
+    // padding: 0 4rem;
     width: 100%;
-    height: 85vh;
-    overflow:hidden; 
-    @include flex-box(column);
-    justify-content: flex-start;
-    align-items: flex-start;
-    scroll-snap-align: start;
+    // height: 30vh;
+ 
+
+    @include tablet{
+        height: 85vh;
+        padding: 0 4rem;
+        @include flex-box(row);
+        justify-content: flex-start;
+        align-items: flex-start;
+        scroll-snap-align: start;
+        overflow:hidden; 
+    }
 
     &__wrapper{
         @include flex-box(column);
@@ -17,11 +23,20 @@
         position: relative;
         width: 100%;
         overflow: hidden;
+        top: 66%;
+
+        @include tablet{
+            top: 0;
+        }
     }
 
    &__mainHeader{
          position: relative;
          top: -20%;
-        font-size: 30rem;
+        font-size: 5.5rem;
+
+        @include tablet{
+            font-size: 30rem;
+        }
     }
 }

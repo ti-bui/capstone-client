@@ -18,7 +18,8 @@ const CommentForm = ({ imageId, albumId }) => {
   const [messageToDelete, setMessageToDelete] = useState("");
   const [deleteModal, setDeleteModal] = useState(false);
 
-  const api = "https://capstone-server-67ff.onrender.com/albums";
+  // const api = "https://capstone-server-67ff.onrender.com/albums";
+  const api = "http://localhost:3011/albums";
 
   const handleOpenModal = (message) => {
     setDeleteModal(true);
