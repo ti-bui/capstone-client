@@ -2,68 +2,67 @@
 @use "/src/styles/partials/variables" as *;
 
 .albumsList{
-  @include flex-box(column);
+
+  @include desktop{
+    @include flex-box(column);
     width: 100%;
     position: relative;
     z-index: 1;
     scroll-snap-align: start;
+  }
+
 
   &__list{
 
-    @include flex-box(column);
-    width: 100%;
+    @include desktop{
+      @include flex-box(column);
+      width: 100%;
+    }
+
 
     &-album{
-      width: 100vw;
-      height: 26vh;
-      position: relative;
-      overflow: hidden;
-
-      @include tablet{
+   position: relative;
+      @include desktop{
+        width: 100vw;
         height: 100vh;
+        position: relative;
+        overflow: hidden;
+  
       }
 
       &-thumbnail{
-        @include flex-box(row);
+       
+
+        @include desktop{
+           @include flex-box(row);
         align-items: center;
         justify-content: center;
         position: absolute;
-        left: 0;
-        top: 0;
         width: 100vw;
         height: 100vh;
         background-position: center;
         will-change: transform;
         background-size: cover;
 
-        @include tablet{
-          height: 26vh;
         }
 
         &-img{
+          display: block;
           width: 100%;
         }
       }
       &-title{
-        @include flex-box(column);
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        text-align: center;
-        width: 95%;
-        padding: 10rem; 
-        margin: 0 auto;
-        max-width: 68rem;
-        position: relative;
-        align-items: center;
-        color: white;
         text-transform: uppercase;
-        line-height: 100%;
         font-size: 2rem;
-        height: 50px;
 
-        @include tablet{
-          padding: 25rem; 
+        @include desktop{
+          width: 100%;
+          height: 100%;
+            @include flex-box(column);
+            align-items: center;
+        justify-content: center;
+
+        color: white;
           font-size: 10rem;
         }
       }
