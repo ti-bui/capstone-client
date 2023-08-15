@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/all";
+import Nav from "../Nav/Nav";
 
 const About = () => {
   gsap.registerPlugin(SplitText);
@@ -27,6 +28,7 @@ const About = () => {
 
   return (
     <AnimatePresence>
+      <Nav />
       <motion.section
         initial={{ opacity: 0 }}
         animate={{
