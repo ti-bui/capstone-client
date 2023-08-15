@@ -96,8 +96,8 @@ const PhotoDetails = () => {
       imgBlock.forEach((photo) => {
         let tl = gsap.timeline({
           scrollTrigger: {
-            start: "top top",
-            end: "70% top",
+            start: "-110% top",
+            end: "10% top",
             trigger: ".photoList__lists-list",
             scrub: 1,
             toggleActions: "play complete none complete",
