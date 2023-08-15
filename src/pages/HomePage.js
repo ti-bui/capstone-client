@@ -8,7 +8,6 @@ import Nav from "../components/Nav/Nav";
 
 const HomePage = () => {
   const albums_api = "https://capstone-server-67ff.onrender.com/albums";
-  // const albums_api = "http://localhost:3011/albums";
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
 

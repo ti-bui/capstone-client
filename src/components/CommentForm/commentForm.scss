@@ -16,31 +16,47 @@ em-emoji-picker{
 }
 
 .form{
+    padding: 0 1rem;
     background-color: $cream;
-    height: 50%;
     width: 100%;
-    @include flex-box(column);
+    @include flex-box(row);
     justify-content: center;
     align-items: center;
 
+    @include tablet{
+        margin-top: 2rem;
+        padding: 0;
+        @include flex-box(column);
+        height: 50%;
+    }
+
     &__container{
         position: relative;
-        width: 70%;
+        width: 80%;
         @include flex-box(column);
-        margin: 1rem 0;
+        margin: 1rem 0 0.7rem 0;
+
+        @include tablet{
+            width: 70%;
+            margin: 1rem 0;
+        }
       
         &-input{
             font-family: 'Roboto', sans-serif;
             font-weight: 400;
             font-size: 0.9rem;
             margin: 1rem 0;
-            padding: 1rem;
+            padding: 0.7rem;
             text-indent: 1rem;
             width: 100%;
             height: 5rem;
             border-radius: 1rem;
             border: 1px solid black;
             box-shadow:-5px 7px 2px 1px rgb(0, 0, 0);
+
+            @include tablet{
+                padding: 1rem;
+            }
         }
         &-input::placeholder{
             font-size: 0.7rem;
@@ -51,6 +67,11 @@ em-emoji-picker{
     }
 
     &__emojiWrap{
+        display: none;
+
+        @include desktop{
+            display: contents;
+        }
         &-picker{
             overflow: hidden;
             height: 25rem;
@@ -93,6 +114,11 @@ em-emoji-picker{
         background-color: $cream;
         color: rgb(0, 0, 0);
         box-shadow:-5px 7px 2px 1px rgb(0, 0, 0);
+        margin-left: 2rem;
+
+        @include tablet{
+            margin: 0;
+        }
     }
     &__button:hover{
         font-weight: bold;
@@ -105,20 +131,29 @@ em-emoji-picker{
 }
 
 .posted{
-    height: 50%;
     width: 70%;
     padding-right: 1rem;
     @include flex-box(column);
     align-items: flex-start;
     overflow:hidden; 
 
+    @include tablet{
+        margin-top: 5rem;
+        padding: 0;
+        height: 30%;
+    }
+
     &__wrapper{
+        margin: 0.3rem 0;
         position: relative;
-        margin: 1rem 0;
         background-color: rgba(195, 216, 79, 0.372);
         @include flex-box(row);
         border: 1px solid black;
         border-radius: 1.4rem;
+
+        @include tablet{
+            margin: 1rem 0;
+        }
 
         &-text{
             padding: 0 1rem

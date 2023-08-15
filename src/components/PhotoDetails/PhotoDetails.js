@@ -27,7 +27,6 @@ const PhotoDetails = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const albums_api = "https://capstone-server-67ff.onrender.com/albums";
-  // const albums_api = "http://localhost:3011/albums";
 
   const handleOpenModal = (photo) => {
     setModalVisible(true);

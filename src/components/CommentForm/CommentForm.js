@@ -19,7 +19,6 @@ const CommentForm = ({ imageId, albumId }) => {
   const [deleteModal, setDeleteModal] = useState(false);
 
   const api = "https://capstone-server-67ff.onrender.com/albums";
-  // const api = "http://localhost:3011/albums";
 
   const handleOpenModal = (message) => {
     setDeleteModal(true);
@@ -130,20 +129,21 @@ const CommentForm = ({ imageId, albumId }) => {
             </div>
           </div>
         </div>
-
-        {isSent === true && (
-          <div className="isSent">
-            <img
-              className="isSent__checkIcon"
-              src={checkIcon}
-              alt="check mark"
-            />
-            <p className="isSent__text">Sent</p>
-          </div>
-        )}
-        <button className="form__button" type="submit">
-          send
-        </button>
+        <div className="wrap">
+          {isSent === true && (
+            <div className="isSent">
+              <img
+                className="isSent__checkIcon"
+                src={checkIcon}
+                alt="check mark"
+              />
+              <p className="isSent__text">Sent</p>
+            </div>
+          )}
+          <button className="form__button" type="submit">
+            send
+          </button>
+        </div>
       </form>
 
       <section className="posted">
