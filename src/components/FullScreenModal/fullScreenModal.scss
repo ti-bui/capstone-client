@@ -24,15 +24,22 @@
         
 }
     &__content{
-        @include flex-box(row);
-        justify-content: center;
-        align-items: center;
-        width: auto;
-        height: 100%;
-        overflow: hidden;
+        margin: 0 1rem;
+
+        @include tablet{
+            margin:0 5rem;
+        }
+        @include desktop{
+            margin: 0;
+            @include flex-box(row);
+            justify-content: center;
+            align-items: center;
+            width: auto;
+            height: 100%;
+            overflow: hidden;
+        }
         
         &-img{
-            border-radius: 1%;
             height: 100%;
             width: 100%;
         }

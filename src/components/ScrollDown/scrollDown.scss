@@ -4,11 +4,21 @@
 .arrows {
       position: relative;
       position: absolute;
-      top: 90%;
+      top: 15%;
       left:50%;
-      width:$size;
-      height:$size;
+      width: 0.5rem;
+      height: 0.5rem;
       transform:translate(-50%,-50%);
+
+  @include tablet{
+    top:39%;
+    width:$size;
+    height:$size;
+  }
+  @include desktop{
+    top: 62%;
+  }
+
       &:before {
         content: '';
         position: absolute;

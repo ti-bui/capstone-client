@@ -21,7 +21,8 @@
 
 
     &-album{
-   position: relative;
+      position: relative;
+      
       @include desktop{
         width: 100vw;
         height: 100vh;

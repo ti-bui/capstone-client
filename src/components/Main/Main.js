@@ -7,16 +7,17 @@ import ScrollDown from "../ScrollDown/ScrollDown";
 gsap.registerPlugin(SplitText);
 
 const Main = () => {
-  // let mySplitText = new SplitText(".main__mainHeader", { type: "chars" });
+  let mySplitText = new SplitText(".main__mainHeader", { type: "chars" });
 
-  // let chars = mySplitText.chars;
+  let chars = mySplitText.chars;
 
   // useEffect(() => {
   //   gsap.to(chars, {
   //     duration: 1,
   //     opacity: 1,
   //     stagger: 0.1,
-  //     y: window.innerWidth > 768 ? "-40px" : "-20px",
+  //     y: window.innerWidth > 768 ? "-3%" : "-20px",
+  //     // y: "-3%",
   //     ease: Power3.easeOut,
   //   });
   // });
@@ -26,7 +27,7 @@ const Main = () => {
       <div className="main">
         <h1 className="main__mainHeader">Ti Bui</h1>
       </div>
-      {/* <ScrollDown /> */}
+      <ScrollDown />
     </>
   );
 };

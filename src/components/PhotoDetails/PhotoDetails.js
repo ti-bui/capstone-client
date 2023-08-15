@@ -68,57 +68,61 @@ const PhotoDetails = () => {
   };
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      stagger: 0.3,
-      scrollTrigger: {
-        trigger: ".photoList",
-        start: "30% 20%",
-        end: "80% 20%",
-        toggleClass: "cream",
-        ease: "back",
-        scrub: 1,
-        toggleActions: "play complete reverse reverse",
-      },
-    });
-
-    tl.to(".header-animate", { y: 600, duration: 2 });
-  });
-
-  useEffect(() => {
-    let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
-
-    imgBlock.forEach((photo) => {
-      let tl = gsap.timeline({
+    if (window.innerWidth >= 1280) {
+      const tl = gsap.timeline({
+        stagger: 0.3,
         scrollTrigger: {
-          start: "top top",
-          end: "70% top",
-          trigger: ".photoList__lists-list",
+          trigger: ".photoList",
+          start: "30% 20%",
+          end: "80% 20%",
+          toggleClass: "cream",
+          ease: "back",
           scrub: 1,
-          toggleActions: "play complete none complete",
+          toggleActions: "play complete reverse reverse",
         },
       });
 
-      tl.to(photo, {
-        width: "90%",
-      });
-    });
+      tl.to(".header-animate", { y: 600, duration: 2 });
+    }
   });
 
   useEffect(() => {
-    let mySplitText = new SplitText(".photoList__intro", {
-      type: "chars",
-    });
+    if (window.innerWidth >= 1280) {
+      let imgBlock = gsap.utils.toArray(".photoList__lists-list-cardWrap");
 
-    let chars = mySplitText.chars;
+      imgBlock.forEach((photo) => {
+        let tl = gsap.timeline({
+          scrollTrigger: {
+            start: "top top",
+            end: "70% top",
+            trigger: ".photoList__lists-list",
+            scrub: 1,
+            toggleActions: "play complete none complete",
+          },
+        });
 
-    gsap.from(chars, {
-      opacity: 0,
-      y: 70,
-      duration: 2,
-      ease: "back",
-      stagger: 0.03,
-    });
+        tl.to(photo, {
+          width: "70vw",
+        });
+      });
+    }
   });
+
+  // useEffect(() => {
+  //   let mySplitText = new SplitText(".photoList__intro", {
+  //     type: "chars",
+  //   });
+
+  //   let chars = mySplitText.chars;
+
+  //   gsap.from(chars, {
+  //     opacity: 0,
+  //     y: 70,
+  //     duration: 2,
+  //     ease: "back",
+  //     stagger: 0.03,
+  //   });
+  // });
 
   useEffect(() => {
     axios
@@ -155,7 +159,12 @@ const PhotoDetails = () => {
             y: 0,
             x: 0,
             width: "100%",
-            height: window.innerWidth > 768 ? "100vh" : 300,
+            height:
+              window.innerWidth >= 320 && window.innerWidth < 768
+                ? 265
+                : window.innerWidth >= 768 && window.innerWidth < 1280
+                ? "60%"
+                : "100%",
             transition: { delay: 0.5, ...transition },
           }}
           className="photoList__thumbnail"

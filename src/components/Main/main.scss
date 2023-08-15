@@ -8,6 +8,7 @@
         @include flex-box(row);
         justify-content: center;
         align-items: center;
+        line-height: normal;
     }
 
    &__mainHeader{
@@ -18,7 +19,9 @@
             
         }
         @include desktop{
+            height: 50vh;
             font-size: 28rem;
+            vertical-align: top;
         }
     }
 }
