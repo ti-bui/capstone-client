@@ -4,24 +4,14 @@
 .main{
     text-align: center;    
 
-    @include desktop{
-        @include flex-box(row);
-        justify-content: center;
-        align-items: center;
-        line-height: normal;
-    }
-
    &__mainHeader{
         font-size: 5.5rem;
 
         @include tablet{
             font-size: 16rem;
-            
         }
         @include desktop{
-            height: 50vh;
             font-size: 28rem;
-            vertical-align: top;
         }
     }
 }
