@@ -1,7 +1,11 @@
 import "./preloader.scss";
 
 const PreLoader = () => {
-  return <div className="preloader"></div>;
+  return (
+    <div id="myProgress">
+      <div id="myBar"></div>
+    </div>
+  );
 };
 
 export default PreLoader;

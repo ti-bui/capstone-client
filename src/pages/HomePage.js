@@ -27,12 +27,13 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <PreLoader />;
-  }
+  // if (loading) {
+  //   return <PreLoader />;
+  // }
 
   return (
     <>
+      <PreLoader />
       <Nav />
       <Main />
       <PhotoList albums={albums} />
