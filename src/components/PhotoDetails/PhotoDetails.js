@@ -11,6 +11,8 @@ import messageIcon from "../../assets/icons/message-icon.svg";
 import fullscreenIcon from "../../assets/icons/fullscreen.svg";
 import CommentForm from "../CommentForm/CommentForm";
 import FullScreenModal from "../FullScreenModal/FullScreenModal";
+import Nav from "../Nav/Nav";
+import PreLoader from "../PreLoader/PreLoader";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -23,6 +25,7 @@ const PhotoDetails = () => {
   const transition = { duration: 2, ease: [0.6, 0.01, -0.05, 0.9] };
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const albums_api = "https://capstone-server-67ff.onrender.com/albums";
   // const albums_api = "http://localhost:3011/albums";
 
@@ -108,35 +111,44 @@ const PhotoDetails = () => {
     }
   });
 
-  // useEffect(() => {
-  //   let mySplitText = new SplitText(".photoList__intro", {
-  //     type: "chars",
-  //   });
+  useEffect(() => {
+    let mySplitText = new SplitText(".photoList__intro", {
+      type: "chars",
+    });
 
-  //   let chars = mySplitText.chars;
+    let chars = mySplitText.chars;
 
-  //   gsap.from(chars, {
-  //     opacity: 0,
-  //     y: 70,
-  //     duration: 2,
-  //     ease: "back",
-  //     stagger: 0.03,
-  //   });
-  // });
+    gsap.from(chars, {
+      opacity: 0,
+      y: 70,
+      duration: 2,
+      ease: "back",
+      stagger: 0.03,
+    });
+  });
 
   useEffect(() => {
-    axios
-      .get(`${albums_api}/${id}`)
-      .then((response) => {
-        setPhotos(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching photos data:", error);
-      });
+    const fetchData = async () => {
+      try {
+        await axios.get(`${albums_api}/${id}`).then((response) => {
+          setPhotos(response.data);
+          setLoading(false);
+        });
+      } catch (err) {
+        console.log("Error fetching data: ", err);
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, [id]);
+
+  if (loading) {
+    return <PreLoader />;
+  }
 
   return (
     <AnimatePresence>
+      <Nav />
       <motion.section
         initial={{ opacity: 0 }}
         animate={{
