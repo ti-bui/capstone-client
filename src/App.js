@@ -11,7 +11,7 @@ import ScrollToTopOnRouteChange from "./components/ScrollToTop/ScrollToTop";
 function App() {
   return (
     <BrowserRouter>
-      <Nav />
+      {/* <Nav /> */}
       <AnimatePresence initial={false} wait>
         <ScrollToTopOnRouteChange />
         <Routes>
