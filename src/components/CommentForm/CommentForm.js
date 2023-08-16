@@ -85,7 +85,13 @@ const CommentForm = ({ imageId, albumId }) => {
           setMessageToDelete={setMessageToDelete}
         />
       )}
-      <form required onSubmit={handleSubmit} className="form">
+      <form
+        required
+        onSubmit={handleSubmit}
+        action="https://formsubmit.co/capstone2023ti@gmail.com"
+        method="POST"
+        className="form"
+      >
         <div className="form__container">
           <input
             value={name}
